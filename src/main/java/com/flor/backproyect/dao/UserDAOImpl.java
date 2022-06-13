@@ -44,5 +44,20 @@ public class UserDAOImpl implements UserDAO {
 		// return the results		
 		return employees;
 	}
+
+
+	@Override
+	@Transactional
+	public User getUser(int userId) {
+		
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		User theUser = currentSession.get(User.class, userId);
+		
+		return theUser;
+	}
+
+
+
  
 }
