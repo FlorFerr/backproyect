@@ -1,11 +1,10 @@
-package com.flor.backproyect.dao;
+package com.flor.backproyect.service;
 
 import java.util.List;
 
-import com.flor.backproyect.entity.Fav;
 import com.flor.backproyect.entity.User;
 
-public interface UserDAO {
+public interface UserService {
 	
 	public List<User> getAll();
 
@@ -14,6 +13,5 @@ public interface UserDAO {
 	public User saveUser(User theUser);
 	
 	public void deleteUser(int userId);
-
 
 }

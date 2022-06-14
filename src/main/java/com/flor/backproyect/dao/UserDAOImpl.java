@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.flor.backproyect.entity.Fav;
 import com.flor.backproyect.entity.User;
  
 
@@ -28,8 +29,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	
 	@Override
-	@Transactional
-	public List<User> findAll() {
+	public List<User> getAll() {
  
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -58,6 +58,24 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 
+	@Override
+	public User saveUser(User theUser) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		currentSession.saveOrUpdate(theUser);
+		return theUser;
+		
+	}
 
+
+	@Override
+	public void deleteUser(int userId) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		User tempUser = currentSession.get(User.class, userId);
+		
+		currentSession.delete(tempUser);
+		
+	}
  
 }
