@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
+
+
 @Entity
 @Table(name="user")
 public class User {
@@ -29,6 +32,11 @@ public class User {
 	@Column(name="pass")
 	private String pass;
 
+
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private List<Fav> favs;
+	
 	
 
 	public User () {}
@@ -38,6 +46,7 @@ public class User {
 		this.email = email;
 		this.pass = pass;
 	}
+	
 	
 
 	public int getId() {
@@ -67,6 +76,23 @@ public class User {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+
+	public List<Fav> getFavs() {
+		return favs;
+	}
+
+
+	public void setFavs(List<Fav> favs) {
+		this.favs = favs;
+	}
+	
+	public void addFavs(Fav theFav) {
+		if(favs == null) {
+			favs = new ArrayList<>();
+		}
+		favs.add(theFav);
 	}
 
 	

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +15,11 @@ public class Fav {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="idProductFav")
+	@Column(name="id_fav")
 	private int id;
+	
+	@Column(name="id_product_fav")
+	private int id_product_fav;
 	
 	@Column(name="name")
 	private String name;
@@ -22,13 +27,18 @@ public class Fav {
 	@Column(name="category")
 	private String category;
 	
+	
 	public Fav() {}
 
-	public Fav(int id, String name, String category) {
-		this.id = id;
+	
+
+	public Fav(int id_product_fav, String name, String category) {
+		this.id_product_fav = id_product_fav;
 		this.name = name;
 		this.category = category;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -54,10 +64,29 @@ public class Fav {
 		this.category = category;
 	}
 
+
+
+	public int getId_product_fav() {
+		return id_product_fav;
+	}
+
+
+
+	public void setId_product_fav(int id_product_fav) {
+		this.id_product_fav = id_product_fav;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Fav [id=" + id + ", name=" + name + ", category=" + category + "]";
+		return "Fav [id=" + id + ", id_product_fav=" + id_product_fav + ", name=" + name + ", category=" + category
+				+ "]";
 	}
+	
+	
+
+
 
 	
 }

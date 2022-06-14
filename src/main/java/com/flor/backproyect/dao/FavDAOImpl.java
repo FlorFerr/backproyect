@@ -11,71 +11,51 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.flor.backproyect.entity.Fav;
-import com.flor.backproyect.entity.User;
+
  
 
  
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class FavDAOImpl implements FavDAO {
  
 	// define field for entitymanager	
 	private EntityManager entityManager;
 		
 	// set up constructor injection
 	@Autowired
-	public UserDAOImpl(EntityManager theEntityManager) {
+	public FavDAOImpl(EntityManager theEntityManager) {
 		entityManager = theEntityManager;
 	}
 	
 	
 	@Override
-	public List<User> getAll() {
+	public List<Fav> getAll() {
  
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		// create a query
-		Query<User> theQuery =
-				currentSession.createQuery("from User", User.class);
+		Query<Fav> theQuery =
+				currentSession.createQuery("from Fav", Fav.class);
 		
 		// execute query and get result list
-		List<User> users = theQuery.getResultList();
+		List<Fav> favs = theQuery.getResultList();
 		
 		// return the results		
-		return users;
+		return favs;
 	}
 
 
 	@Override
 	@Transactional
-	public User getUser(int userId) {
+	public Fav saveFav(Fav theFav) {
 		
 		Session currentSession = entityManager.unwrap(Session.class);
 		
-		User theUser = currentSession.get(User.class, userId);
-		
-		return theUser;
+		currentSession.saveOrUpdate(theFav);
+		return theFav;
 	}
 
 
-	@Override
-	public User saveUser(User theUser) {
-		Session currentSession = entityManager.unwrap(Session.class);
-		
-		currentSession.saveOrUpdate(theUser);
-		return theUser;
-		
-	}
-
-
-	@Override
-	public void deleteUser(int userId) {
-		Session currentSession = entityManager.unwrap(Session.class);
-		
-		User tempUser = currentSession.get(User.class, userId);
-		
-		currentSession.delete(tempUser);
-		
-	}
  
 }
