@@ -10,46 +10,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.entity.Fav;
+import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.User;
-import com.flor.backproyect.service.FavService;
+import com.flor.backproyect.service.CartService;
 import com.flor.backproyect.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class FavController {
+public class CartController {
 	
-	private FavService favService;
+	private CartService cartService;
 	private UserService userService;
 	
 	@Autowired
-	public FavController(FavService theFavService, UserService theUserService) {
-		favService = theFavService;		
+	public CartController(CartService theCartService, UserService theUserService) {
+		cartService = theCartService;
 		userService = theUserService;
 	}
 	
-	@GetMapping("/users/{userId}/favs")
-	public List<Fav> findAll(@PathVariable int userId){
+	@GetMapping("/users/{userId}/cart")
+	public List<Cart> getAll(@PathVariable int userId){
 		
 		User tempUser = userService.getUser(userId);
-		return tempUser.getFavs();
+		return tempUser.getCartItems();
 		
 	}
 	
-	@PostMapping("/users/{userId}/favs")
-	public Fav saveFav(@RequestBody Fav theFav, @PathVariable int userId) {
+	@PostMapping("/users/{userId}/cart")
+	public Cart saveCart(@RequestBody Cart theCart, @PathVariable int userId) {
 		
-		User theUser = userService.getUser(userId);
+		User tempUser = userService.getUser(userId);
 		
-		theUser.addFavs(theFav);
+		tempUser.addCartItems(theCart);
 		
-		favService.saveFav(theFav);
+		cartService.saveCart(theCart);
+		return theCart;
 		
-		return theFav;
+		
 		
 	}
-	
-
 }
-
-	

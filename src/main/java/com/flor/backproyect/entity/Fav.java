@@ -18,6 +18,7 @@ public class Fav {
 	@Column(name="id_fav")
 	private int id;
 	
+	
 	@Column(name="id_product_fav")
 	private int id_product_fav;
 	
@@ -84,7 +85,7 @@ public class Fav {
 				+ "]";
 	}
 	
-	
+
 
 
 

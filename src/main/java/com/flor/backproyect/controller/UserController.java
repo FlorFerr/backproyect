@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flor.backproyect.entity.Fav;
 import com.flor.backproyect.entity.User;
+import com.flor.backproyect.service.FavService;
 import com.flor.backproyect.service.UserService;
 
 @RestController
@@ -20,10 +22,12 @@ import com.flor.backproyect.service.UserService;
 public class UserController {
 	
 	private UserService userService;
+	private FavService favService;
 	
 	@Autowired
-	public UserController(UserService theUserService) {
-		userService = theUserService;		
+	public UserController(UserService theUserService, FavService theFavService) {
+		userService = theUserService;	
+		favService = theFavService;
 	}
 	
 	@GetMapping("/users")
@@ -56,14 +60,14 @@ public class UserController {
 	@DeleteMapping("/users/{userId}")
 	public String deleteUser(@PathVariable int userId) {
 	
-	User tempUser = userService.getUser(userId);
-	
-	if(tempUser == null) {
-		throw new RuntimeException("User not found");
-	}
-	
-	userService.deleteUser(userId);
-	return "Delete";
+		User tempUser = userService.getUser(userId);
+		
+		if(tempUser == null) {
+			throw new RuntimeException("User not found");
+		}
+		
+		userService.deleteUser(userId);
+		return "Delete";
 	}
 	
 	@PutMapping("users")
@@ -73,6 +77,9 @@ public class UserController {
 		return theUser;
 		
 	}
+	
+
+	
 
 }
 

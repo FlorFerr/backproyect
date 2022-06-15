@@ -11,6 +11,9 @@ public interface FavService {
 	public List<Fav> getAll();
 	
 	public Fav saveFav(Fav theFav);
-	
+
+
+
+
 	
 }

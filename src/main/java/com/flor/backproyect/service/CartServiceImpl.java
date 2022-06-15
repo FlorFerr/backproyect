@@ -7,34 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.flor.backproyect.dao.CartRepository;
 import com.flor.backproyect.dao.FavRepository;
+import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.Fav;
 
 
 
 @Service
-public class FavServiceImpl implements FavService {
+public class CartServiceImpl implements CartService {
 	
-	private FavRepository favRepository;
+	private CartRepository cartRepository;
 	
 	@Autowired
-	public FavServiceImpl(FavRepository theFavRepository) {
-		favRepository = theFavRepository;
+	public CartServiceImpl(CartRepository theCartRepository) {
+		cartRepository = theCartRepository;
 	}
 
 	@Override
 	@Transactional
-	public List<Fav> getAll() {
+	public List<Cart> getAll() {
 
-		return favRepository.findAll();	
+		return cartRepository.findAll();	
 		}
 
 	@Override
-	@Transactional
-	public Fav saveFav(Fav theFav) {
+	public Cart saveCart(Cart cartItems) {
 		
-		return favRepository.save(theFav);
-
+		return cartRepository.save(cartItems);
 	}
 
 

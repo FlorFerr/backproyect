@@ -13,8 +13,11 @@ public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="idProductCart")
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="id_cart")
+	private int id_cart;
 	
 	@Column(name="name")
 	private String name;
@@ -27,19 +30,30 @@ public class Cart {
 	
 	public Cart() {}
 
-	public Cart(int id, String name, String category, int amount) {
-		this.id = id;
+	public Cart(int id_cart, String name, String category, int amount) {
+		this.id_cart = id_cart;
 		this.name = name;
 		this.category = category;
 		this.amount = amount;
 	}
 
+
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+
+	public int getId_cart() {
+		return id_cart;
+	}
+
+	public void setId_cart(int id_cart) {
+		this.id_cart = id_cart;
 	}
 
 	public String getName() {
@@ -68,7 +82,10 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", name=" + name + ", category=" + category + ", amount=" + amount + "]";
+		return "Cart [id=" + id + ", id_cart=" + id_cart + ", name=" + name + ", category=" + category + ", amount="
+				+ amount + "]";
 	}
+
+	
 
 }
