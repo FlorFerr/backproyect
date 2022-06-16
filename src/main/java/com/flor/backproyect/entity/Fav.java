@@ -1,12 +1,11 @@
 package com.flor.backproyect.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +19,7 @@ public class Fav {
 	
 	
 	@Column(name="id_product_fav")
-	private int id_product_fav;
+	private int idProductFav;
 	
 	@Column(name="name")
 	private String name;
@@ -28,18 +27,17 @@ public class Fav {
 	@Column(name="category")
 	private String category;
 	
+	@Column(name="user_id")
+	private int userId;
 	
-	public Fav() {}
-
 	
+	public Fav() {}	
 
-	public Fav(int id_product_fav, String name, String category) {
-		this.id_product_fav = id_product_fav;
+	public Fav(int idProductFav, String name, String category) {
+		this.idProductFav = idProductFav;
 		this.name = name;
 		this.category = category;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -47,6 +45,14 @@ public class Fav {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getIdProductFav() {
+		return idProductFav;
+	}
+
+	public void setIdProductFav(int idProductFav) {
+		this.idProductFav = idProductFav;
 	}
 
 	public String getName() {
@@ -65,26 +71,23 @@ public class Fav {
 		this.category = category;
 	}
 
-
-
-	public int getId_product_fav() {
-		return id_product_fav;
+	public int getUserId() {
+		return userId;
 	}
 
-
-
-	public void setId_product_fav(int id_product_fav) {
-		this.id_product_fav = id_product_fav;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-
-
 
 	@Override
 	public String toString() {
-		return "Fav [id=" + id + ", id_product_fav=" + id_product_fav + ", name=" + name + ", category=" + category
-				+ "]";
+		return "Fav [id=" + id + ", idProductFav=" + idProductFav + ", name=" + name + ", category=" + category
+				+ ", userId=" + userId + "]";
 	}
+
+
 	
+
 
 
 

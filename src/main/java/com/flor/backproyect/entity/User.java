@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="user")
@@ -29,9 +31,8 @@ public class User {
 	@Column(name="pass")
 	private String pass;
 
-
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
+	
+	@OneToMany(cascade= CascadeType.ALL)
 	private List<Fav> favs;
 	
 
@@ -105,20 +106,19 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", pass=" + pass + "]";
 	}
-
-
-	public void addFavs(Fav theFav) {
-		if(favs == null) {
-			favs = new ArrayList<>();
-		}
-		favs.add(theFav);
-	}
 	
 	public void addCartItems(Cart theCart) {
 		if(cartItems == null) {
 			cartItems = new ArrayList<>();
 		}
 		cartItems.add(theCart);
+	}
+	
+	public void addFav(Fav theFav) {
+		if(favs == null) {
+			favs = new ArrayList<>();
+		}
+		favs.add(theFav);
 	}
 		
 }

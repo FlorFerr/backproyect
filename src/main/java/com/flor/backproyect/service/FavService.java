@@ -12,6 +12,12 @@ public interface FavService {
 	
 	public Fav saveFav(Fav theFav);
 
+	Fav getFav(int user, String category, int idProductFav);
+
+	void deleteFav(int user, String category, int idProductFav);
+
+
+
 
 
 
