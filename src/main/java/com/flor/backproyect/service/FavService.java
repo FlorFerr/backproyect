@@ -14,7 +14,7 @@ public interface FavService {
 
 	Fav getFav(int user, String category, int idProductFav);
 
-	void deleteFav(int user, String category, int idProductFav);
+	void deleteFav(int userId, String category, int idProductFav);
 
 
 

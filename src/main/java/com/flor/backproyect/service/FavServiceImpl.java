@@ -47,9 +47,9 @@ public class FavServiceImpl implements FavService {
 
 	@Override
 	@Transactional
-	public void deleteFav(int user, String category, int idProductFav) {
+	public void deleteFav(int userId, String category, int idProductFav) {
 		
-		favRepository.deleteByUserIdAndCategoryAndIdProductFav(user, category, idProductFav);
+		favRepository.deleteByUserIdAndCategoryAndIdProductFav(userId, category, idProductFav);
 		
 	}
 	
