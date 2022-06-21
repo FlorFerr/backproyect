@@ -36,7 +36,7 @@ public class FavController {
 		return theFav;
 	}
 	
-	@PostMapping("/favorites")
+	@PostMapping("/favorites/{userId}")
 	public Fav saveCart(@RequestBody Fav theFav, @RequestParam int userId) {
 		
 		User tempUser = userService.getUser(userId);

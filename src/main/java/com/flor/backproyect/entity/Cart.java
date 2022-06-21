@@ -17,7 +17,7 @@ public class Cart {
 	private int id;
 	
 	@Column(name="id_cart")
-	private int id_cart;
+	private int idCart;
 	
 	@Column(name="name")
 	private String name;
@@ -30,8 +30,8 @@ public class Cart {
 	
 	public Cart() {}
 
-	public Cart(int id_cart, String name, String category, int amount) {
-		this.id_cart = id_cart;
+	public Cart(int idCart, String name, String category, int amount) {
+		this.idCart = idCart;
 		this.name = name;
 		this.category = category;
 		this.amount = amount;
@@ -48,12 +48,12 @@ public class Cart {
 	}
 	
 
-	public int getId_cart() {
-		return id_cart;
+	public int getIdCart() {
+		return idCart;
 	}
 
-	public void setId_cart(int id_cart) {
-		this.id_cart = id_cart;
+	public void setId_cart(int idCart) {
+		this.idCart = idCart;
 	}
 
 	public String getName() {
@@ -82,7 +82,7 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", id_cart=" + id_cart + ", name=" + name + ", category=" + category + ", amount="
+		return "Cart [id=" + id + ", idCart=" + idCart + ", name=" + name + ", category=" + category + ", amount="
 				+ amount + "]";
 	}
 

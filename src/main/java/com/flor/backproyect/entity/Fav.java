@@ -25,7 +25,7 @@ public class Fav {
 	
 	@Column(name="category")
 	private String category;
-	
+		
 	@Column(name="user_id")
 	private int userId;
 	

@@ -32,10 +32,19 @@ public class CartServiceImpl implements CartService {
 		}
 
 	@Override
+	@Transactional
 	public Cart saveCart(Cart cartItems) {
 		
 		return cartRepository.save(cartItems);
 	}
+	@Override
+	@Transactional
+    public int updateCartAmountByName(int amount,String name){
+		
+		return cartRepository.updateCartAmountByName(amount, name);
+
+    }
+
 
 
 }
