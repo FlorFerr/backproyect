@@ -37,21 +37,35 @@ public class FavServiceImpl implements FavService {
 
 	}
 	
+
+
+
 	@Override
 	@Transactional
-	public Fav getFav(int user, String category, int idProductFav) {
+	public void deleteByName(String name) {
+		favRepository.deleteByName(name);
 		
-		return favRepository.findByUserIdAndCategoryAndIdProductFav(user, category, idProductFav);
-
 	}
 
 	@Override
 	@Transactional
-	public void deleteFav(int userId, String category, int idProductFav) {
+	public Fav getByIdProduct(int idProductFav) {
+
 		
-		favRepository.deleteByUserIdAndCategoryAndIdProductFav(userId, category, idProductFav);
+		Optional<Fav> result = favRepository.findByIdProductFav(idProductFav);
 		
+		Fav theFav = null;
+		
+		if(result.isPresent()) {
+			theFav = result.get();
+		}
+		else {
+			throw new RuntimeException("Fav not found");
+		}
+		return theFav;
 	}
+
+
 	
 
 

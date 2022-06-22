@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,44 +32,32 @@ public class CartController {
 		userService = theUserService;
 	}
 	
-	@GetMapping("/users/{userId}/cart")
-	public List<Cart> getAll(@PathVariable int userId){
-		
+	@GetMapping("/users/cart")
+	public List<Cart> getAll(@RequestParam int userId){
 		User tempUser = userService.getUser(userId);
 		return tempUser.getCartItems();
-		
 	}
 	
-	@PostMapping("/users/{userId}/cart")
-	public Cart saveCart(@RequestBody Cart theCart, @PathVariable int userId) {
-		
+	@PostMapping("/users/cart")
+	public Cart saveCart(@RequestParam int userId, @RequestBody Cart theCart) {
 		User tempUser = userService.getUser(userId);
-		
 		tempUser.addCartItems(theCart);
-		
 		cartService.saveCart(theCart);
 		return theCart;
 	}
 	
-	@PutMapping("users/{userId}/cart")
-	public void updateUser(@RequestParam int amount, @RequestParam String name, @PathVariable int userId) {
-		
+	@PutMapping("users/cart")
+	public void updateCartItem(@RequestParam int userId, @RequestParam int amount, @RequestParam String name) {
 		cartService.updateCartAmountByName(amount, name);
-		
-		
 	}
 	
-	@DeleteMapping("users/{userId}/cart")
-	public void deleteCartItem(@RequestParam String name, @PathVariable int userId) {
-		
+	@DeleteMapping("users/cart")
+	public void deleteCartItem(@RequestParam int userId, @RequestParam String name) {
 		cartService.deleteByName(name);
-		
 	}
 	
-	@DeleteMapping("users/{userId}/cart/deleteAll")
-	public void deleteCart(@PathVariable int userId) {
-		
+	@DeleteMapping("users/cart/deleteAll")
+	public void deleteCart(@RequestParam int userId) {
 		cartService.deleteCart();
-		
 	}
 }

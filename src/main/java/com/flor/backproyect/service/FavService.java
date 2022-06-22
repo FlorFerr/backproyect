@@ -1,9 +1,9 @@
 package com.flor.backproyect.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.flor.backproyect.entity.Fav;
-import com.flor.backproyect.entity.User;
 
 
 public interface FavService {
@@ -12,12 +12,9 @@ public interface FavService {
 	
 	public Fav saveFav(Fav theFav);
 
-	Fav getFav(int user, String category, int idProductFav);
+	public void deleteByName(String name);
 
-	void deleteFav(int userId, String category, int idProductFav);
-
-
-
+	public Fav getByIdProduct(int idProductFav);
 
 
 

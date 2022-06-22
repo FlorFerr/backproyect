@@ -33,6 +33,7 @@ public class User {
 
 	
 	@OneToMany(cascade= CascadeType.ALL)
+	@JoinColumn(name="user_id")
 	private List<Fav> favs;
 	
 
