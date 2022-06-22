@@ -49,10 +49,15 @@ public class CartServiceImpl implements CartService {
 	@Transactional
 	public void deleteByName(String name) {
 		cartRepository.deleteByName(name);
-		
-		
-		
 	}
+
+	@Override
+	@Transactional
+	public void deleteCart() {
+		cartRepository.deleteAll();
+	}
+	
+	
 
 
 
