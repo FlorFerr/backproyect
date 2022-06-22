@@ -52,16 +52,16 @@ public class CartController {
 		return theCart;
 	}
 	
-	@PutMapping("users/cart")
-	public void updateUser(@RequestParam int amount, @RequestParam String name) {
+	@PutMapping("users/{userId}/cart")
+	public void updateUser(@RequestParam int amount, @RequestParam String name, @PathVariable int userId) {
 		
 		cartService.updateCartAmountByName(amount, name);
 		
 		
 	}
 	
-	@DeleteMapping("users/cart")
-	public void deleteCartItem(@RequestParam String name) {
+	@DeleteMapping("users/{userId}/cart")
+	public void deleteCartItem(@RequestParam String name, @PathVariable int userId) {
 		
 		cartService.deleteByName(name);
 		
