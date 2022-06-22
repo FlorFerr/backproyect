@@ -11,5 +11,7 @@ public interface CartService {
 	public Cart saveCart(Cart cartItems);
 
 	int updateCartAmountByName(int amount, String name);
+	
+	void deleteByName(String name);
 
 }
