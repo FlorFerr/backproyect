@@ -42,14 +42,14 @@ public class FavController {
 	
 
 	@DeleteMapping("users/favorites")
-	public void deleteFav(@RequestParam int userId, @RequestParam String name) {
-		favService.deleteByName(name);
+	public void deleteFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
+		favService.deleteByIdProductFavAndCategory(idProductFav, category);
 	}
 	
 	@PostMapping("users/favorites")
-	public Fav guardarFav(@RequestParam int userId, @RequestParam String name, @RequestBody Fav theFav) {
+	public Fav guardarFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category, @RequestBody Fav theFav) {
 		
-		Optional<Fav> tempFav = favService.findByName(name);
+		Optional<Fav> tempFav = favService.findByIdProductFavAndCategory(idProductFav, category);
 		
 		if(tempFav.isEmpty()) {
 			User tempUser = userService.getUser(userId);

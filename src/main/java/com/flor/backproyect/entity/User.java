@@ -41,7 +41,9 @@ public class User {
 	@JoinColumn(name="user_id")
 	private List<Cart> cartItems;
 	
-	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private List<Orden> orderItems;
 
 	public User () {}
 
@@ -103,6 +105,16 @@ public class User {
 	}
 
 
+	public List<Orden> getOrderItems() {
+		return orderItems;
+	}
+
+
+	public void setOrderItems(List<Orden> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", pass=" + pass + "]";
@@ -120,6 +132,13 @@ public class User {
 			favs = new ArrayList<>();
 		}
 		favs.add(theFav);
+	}
+	
+	public void addOrder(Orden theOrder) {
+		if(orderItems == null) {
+			orderItems = new ArrayList<>();
+		}
+		orderItems.add(theOrder);
 	}
 		
 }

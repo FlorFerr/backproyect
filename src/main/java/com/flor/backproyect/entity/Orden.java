@@ -14,8 +14,11 @@ public class Orden {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="idProductOrder")
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="id_order")
+	private int idOrder;
 	
 	@Column(name="name")
 	private String name;
@@ -30,8 +33,8 @@ public class Orden {
 	public Orden () {}
 
 
-	public Orden(int id, String name, int amount, String category) {
-		this.id = id;
+	public Orden(int idOrder, String name, int amount, String category) {
+		this.idOrder = idOrder;
 		this.name = name;
 		this.amount = amount;
 		this.category = category;
@@ -45,6 +48,16 @@ public class Orden {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public int getIdOrder() {
+		return idOrder;
+	}
+
+
+	public void setIdOrder(int idOrder) {
+		this.idOrder = idOrder;
 	}
 
 
@@ -80,8 +93,13 @@ public class Orden {
 
 	@Override
 	public String toString() {
-		return "Orden [id=" + id + ", name=" + name + ", amount=" + amount + ", category=" + category + "]";
+		return "Orden [id=" + id + ", idOrder=" + idOrder + ", name=" + name + ", amount=" + amount + ", category="
+				+ category + "]";
 	}
-
+	
+	
 	
 }
+
+	
+	

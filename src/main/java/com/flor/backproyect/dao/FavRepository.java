@@ -10,10 +10,9 @@ import com.flor.backproyect.entity.Fav;
 
 public interface FavRepository extends JpaRepository<Fav, Integer> {
 
-	void deleteByName(String name);
+	void deleteByIdProductFavAndCategory(int idProductFav, String category);
 	
-	
-	Optional<Fav> findByName(String name);
+	Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category);
 	
 	
 }

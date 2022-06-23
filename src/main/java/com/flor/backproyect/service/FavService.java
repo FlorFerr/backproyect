@@ -12,9 +12,9 @@ public interface FavService {
 	
 	public Fav saveFav(Fav theFav);
 
-	public void deleteByName(String name);
+	public void deleteByIdProductFavAndCategory(int idProductFav, String category);
 	
-	public Optional<Fav> findByName(String name);
+	public Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category);
 
 
 
