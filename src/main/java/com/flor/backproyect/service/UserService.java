@@ -1,6 +1,7 @@
 package com.flor.backproyect.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.flor.backproyect.entity.User;
 
@@ -14,4 +15,5 @@ public interface UserService {
 	
 	public void deleteUser(int userId);
 
+	public Optional<User> findByEmailAndPass(String email, String pass);
 }

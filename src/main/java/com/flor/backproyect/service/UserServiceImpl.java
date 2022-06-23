@@ -59,4 +59,13 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	@Transactional
+	public Optional<User> findByEmailAndPass(String email, String pass) {
+		
+		Optional<User> theUser = userRepository.findByEmailAndPass(email, pass);
+		
+		return theUser;
+	}
+
 }

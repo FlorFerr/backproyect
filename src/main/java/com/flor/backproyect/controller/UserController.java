@@ -1,6 +1,7 @@
 package com.flor.backproyect.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,12 +26,10 @@ import com.flor.backproyect.service.UserService;
 public class UserController {
 	
 	private UserService userService;
-	private FavService favService;
 	
 	@Autowired
-	public UserController(UserService theUserService, FavService theFavService) {
+	public UserController(UserService theUserService) {
 		userService = theUserService;	
-		favService = theFavService;
 	}
 	
 	@GetMapping("/users")
@@ -50,6 +49,25 @@ public class UserController {
 		
 		return theUser;
 	}
+
+	@PostMapping("login")
+	public int login(@RequestBody User theUser) {
+		
+		Optional<User> user = userService.findByEmailAndPass(theUser.getEmail(), theUser.getPass());
+		
+		
+		if(user.isPresent()) {
+			if(user.get().getPass() == theUser.getPass()) {
+				return user.get().getId();
+			}
+		}else {
+			throw new RuntimeException("Usuario o contraseña incorrecta");
+			}
+		return user.get().getId();
+	}
+	
+	
+	
 	
 	@PostMapping("users")
 	public User saveUser(@RequestBody User theUser) {
