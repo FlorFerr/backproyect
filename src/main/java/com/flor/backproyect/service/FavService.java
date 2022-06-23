@@ -13,8 +13,9 @@ public interface FavService {
 	public Fav saveFav(Fav theFav);
 
 	public void deleteByName(String name);
+	
+	public Optional<Fav> findByName(String name);
 
-	public Fav getByIdProduct(int idProductFav);
 
 
 

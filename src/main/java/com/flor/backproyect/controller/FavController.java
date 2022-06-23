@@ -1,6 +1,7 @@
 package com.flor.backproyect.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,16 +38,7 @@ public class FavController {
 		return tempUser.getFavs();
 	}
 	
-	@PostMapping("/users/favorites")
-	public Fav saveCart(@RequestParam int userId, @RequestBody Fav theFav) {
-		
-		User tempUser = userService.getUser(userId);
-		
-		tempUser.addFav(theFav);
-		
-		favService.saveFav(theFav);
-		return theFav;
-	}
+
 	
 
 	@DeleteMapping("users/favorites")
@@ -54,37 +46,28 @@ public class FavController {
 		favService.deleteByName(name);
 	}
 	
-	@GetMapping("users/prueba")
-	public Fav getFavById(@RequestParam int idProductFav) {
+	@PostMapping("users/favorites")
+	public Fav guardarFav(@RequestParam int userId, @RequestParam String name, @RequestBody Fav theFav) {
 		
-		Fav theFav = favService.getByIdProduct(idProductFav);
+		Optional<Fav> tempFav = favService.findByName(name);
 		
-		if(theFav == null) {
-			throw new RuntimeException("User id not found");
-		}
-		
-		return theFav;
-		
-	}
-	
-	@PostMapping("users/favorites/prueba")
-	public Fav saveFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestBody Fav theFav) {
-		Fav tempFav = favService.getByIdProduct(idProductFav);
-		
-		if(tempFav == null) {
+		if(tempFav.isEmpty()) {
 			User tempUser = userService.getUser(userId);
 			
 			tempUser.addFav(theFav);
 			
 			favService.saveFav(theFav);
-			return theFav;
-		}
-		else {
+		}else {
 			throw new RuntimeException("El producto ya está en favoritos");
-			
 		}
 		
+		
+		return theFav;
+		
 	}
+	
+	
+	
 
 }
 

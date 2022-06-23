@@ -37,9 +37,6 @@ public class FavServiceImpl implements FavService {
 
 	}
 	
-
-
-
 	@Override
 	@Transactional
 	public void deleteByName(String name) {
@@ -48,22 +45,15 @@ public class FavServiceImpl implements FavService {
 	}
 
 	@Override
-	@Transactional
-	public Fav getByIdProduct(int idProductFav) {
-
+	public Optional<Fav> findByName(String name) {
 		
-		Optional<Fav> result = favRepository.findByIdProductFav(idProductFav);
-		
-		Fav theFav = null;
-		
-		if(result.isPresent()) {
-			theFav = result.get();
-		}
-		else {
-			throw new RuntimeException("Fav not found");
-		}
+		Optional<Fav> theFav = favRepository.findByName(name);
 		return theFav;
 	}
+
+	
+
+	
 
 
 	

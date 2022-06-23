@@ -66,9 +66,6 @@ public class UserController {
 		return user.get().getId();
 	}
 	
-	
-	
-	
 	@PostMapping("users")
 	public User saveUser(@RequestBody User theUser) {
 		
