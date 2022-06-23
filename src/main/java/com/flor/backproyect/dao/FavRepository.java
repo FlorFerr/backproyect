@@ -12,6 +12,7 @@ public interface FavRepository extends JpaRepository<Fav, Integer> {
 
 	void deleteByName(String name);
 	
+	
 	Optional<Fav> findByName(String name);
 	
 	

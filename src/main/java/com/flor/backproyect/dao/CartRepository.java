@@ -12,5 +12,5 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query(nativeQuery = true,value = "update cart set amount = ?1  where name = ?2 ")
 	int updateCartAmountByName(int amount,String name);
 	
-	void deleteByName(String name);
+	void deleteByIdCartAndCategory(int idCart, String category);
 }

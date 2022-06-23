@@ -52,8 +52,8 @@ public class CartController {
 	}
 	
 	@DeleteMapping("users/cart")
-	public void deleteCartItem(@RequestParam int userId, @RequestParam String name) {
-		cartService.deleteByName(name);
+	public void deleteCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
+		cartService.deleteByIdCartAndCategory(idCart, category);
 	}
 	
 	@DeleteMapping("users/cart/deleteAll")

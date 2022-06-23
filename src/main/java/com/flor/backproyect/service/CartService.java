@@ -10,11 +10,11 @@ public interface CartService {
 	
 	public Cart saveCart(Cart cartItems);
 
-	int updateCartAmountByName(int amount, String name);
+	public int updateCartAmountByName(int amount, String name);
 	
-	void deleteByName(String name);
+	public void deleteByIdCartAndCategory(int idCart, String category);
 
-	void deleteCart();
+	public void deleteCart();
 	
 	
 
