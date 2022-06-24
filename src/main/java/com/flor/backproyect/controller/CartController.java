@@ -63,9 +63,7 @@ public class CartController {
 		return cartItem;		
 	}
 	
-	*/
-	
-	@GetMapping("/cart/pruebita")
+		@GetMapping("/cart/pruebita")
 	public Optional<Cart> findCartItemPrueba(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category){
 		
 		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
@@ -74,7 +72,9 @@ public class CartController {
 		
 	}
 	
-	@DeleteMapping("/cart/prueba")
+	*/
+	
+	@DeleteMapping("/cart")
 	public void deleteCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
 		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
 		
