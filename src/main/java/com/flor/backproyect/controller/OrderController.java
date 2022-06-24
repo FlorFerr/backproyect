@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,16 @@ public class OrderController {
 		userService = theUserService;
 	}
 	
+	@GetMapping("/users/order")
+	public List<Orden> getAll(@RequestParam int userId){
+		User tempUser = userService.getUser(userId);
+		
+		return tempUser.getOrderItems();
+		
+	}
+	
+	
+	
 	@PostMapping("/users/order")
 	public Orden saveOrderPrueba(@RequestParam int userId) {
 		
@@ -36,19 +47,20 @@ public class OrderController {
 				
 		List<Cart> cartItems = tempUser.getCartItems();
 		
-		
-		for (int i = 0; i < cartItems.size(); ++i) {
-			Orden theOrder = new Orden();
-			theOrder.setUserId(userId);
-		    theOrder.setAmount(cartItems.get(i).getAmount());
-		    theOrder.setCategory(cartItems.get(i).getCategory());
-		    theOrder.setName(cartItems.get(i).getName());
-		    theOrder.setIdOrder(cartItems.get(i).getIdCart());
-		    orderService.saveOrder(theOrder);
-		    System.out.println(theOrder);
+		if(cartItems.isEmpty()) {
+			throw new RuntimeException("No hay productos en el carrito");
+		}else {
+			for (int i = 0; i < cartItems.size(); ++i) {
+				Orden theOrder = new Orden();
+				theOrder.setUserId(userId);
+			    theOrder.setAmount(cartItems.get(i).getAmount());
+			    theOrder.setCategory(cartItems.get(i).getCategory());
+			    theOrder.setName(cartItems.get(i).getName());
+			    theOrder.setIdOrder(cartItems.get(i).getIdCart());
+			    orderService.saveOrder(theOrder);
+			    System.out.println(theOrder);
+			}
 		}
 		return null;
 	}
-
-
 }

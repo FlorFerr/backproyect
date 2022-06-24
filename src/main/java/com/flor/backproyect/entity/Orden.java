@@ -35,10 +35,6 @@ public class Orden {
 	
 	public Orden () {}
 
-
-	
-
-
 	public Orden(int idOrder, String name, int amount, String category, int userId) {
 		this.idOrder = idOrder;
 		this.name = name;
@@ -47,34 +43,25 @@ public class Orden {
 		this.userId = userId;
 	}
 
-
-
-
-
 	public int getUserId() {
 		return userId;
 	}
-
 
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public int getIdOrder() {
 		return idOrder;
 	}
-
 
 	public void setIdOrder(int idOrder) {
 		this.idOrder = idOrder;
@@ -116,11 +103,6 @@ public class Orden {
 		return "Orden [id=" + id + ", idOrder=" + idOrder + ", name=" + name + ", amount=" + amount + ", category="
 				+ category + ", userId=" + userId + "]";
 	}
-
-
-	
-	
-	
 	
 }
 

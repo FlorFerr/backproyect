@@ -39,8 +39,6 @@ public class FavController {
 	}
 	
 
-	
-
 	@DeleteMapping("users/favorites")
 	public void deleteFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
 		favService.deleteByIdProductFavAndCategory(idProductFav, category);
