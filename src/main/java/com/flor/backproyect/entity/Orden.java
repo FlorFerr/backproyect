@@ -29,15 +29,35 @@ public class Orden {
 	@Column(name="category")
 	private String category;
 	
+	@Column(name="user_id")
+	private int userId;
+	
 	
 	public Orden () {}
 
 
-	public Orden(int idOrder, String name, int amount, String category) {
+	
+
+
+	public Orden(int idOrder, String name, int amount, String category, int userId) {
 		this.idOrder = idOrder;
 		this.name = name;
 		this.amount = amount;
 		this.category = category;
+		this.userId = userId;
+	}
+
+
+
+
+
+	public int getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 
@@ -94,8 +114,11 @@ public class Orden {
 	@Override
 	public String toString() {
 		return "Orden [id=" + id + ", idOrder=" + idOrder + ", name=" + name + ", amount=" + amount + ", category="
-				+ category + "]";
+				+ category + ", userId=" + userId + "]";
 	}
+
+
+	
 	
 	
 	

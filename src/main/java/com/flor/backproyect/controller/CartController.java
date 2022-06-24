@@ -60,4 +60,13 @@ public class CartController {
 	public void deleteCart(@RequestParam int userId) {
 		cartService.deleteCart();
 	}
+	
+	@GetMapping("users/cartitem")
+	public Cart findCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
+		
+		Cart cartItem = cartService.findByIdCartAndCategory(idCart, category);
+		return cartItem;
+		
+		
+	}
 }

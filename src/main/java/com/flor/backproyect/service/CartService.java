@@ -15,6 +15,8 @@ public interface CartService {
 	public void deleteByIdCartAndCategory(int idCart, String category);
 
 	public void deleteCart();
+	
+	public Cart findByIdCartAndCategory(int idCart, String category);
 
 	
 	

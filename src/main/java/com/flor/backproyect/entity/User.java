@@ -13,9 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 @Entity
 @Table(name="user")
 public class User {
@@ -31,11 +28,9 @@ public class User {
 	@Column(name="pass")
 	private String pass;
 
-	
 	@OneToMany(cascade= CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private List<Fav> favs;
-	
 
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")

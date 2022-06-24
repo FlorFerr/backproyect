@@ -13,4 +13,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	int updateCartAmountByName(int amount,String name);
 	
 	void deleteByIdCartAndCategory(int idCart, String category);
+	
+	Cart findByIdCartAndCategory(int idCart, String category);
 }

@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.entity.Fav;
 import com.flor.backproyect.entity.User;
-import com.flor.backproyect.service.FavService;
 import com.flor.backproyect.service.UserService;
 
 @CrossOrigin

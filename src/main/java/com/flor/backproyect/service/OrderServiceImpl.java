@@ -1,13 +1,10 @@
 package com.flor.backproyect.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.flor.backproyect.dao.OrderRepository;
-import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.Orden;
 
 @Service
@@ -20,12 +17,9 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository = theOrderRepository;
 	}
 
-
-
-
-
-
-
-
-
+	@Override
+	@Transactional
+	public Orden saveOrder(Orden theOrder) {
+		return orderRepository.save(theOrder);
+	}
 }

@@ -36,10 +36,6 @@ public class FavServiceImpl implements FavService {
 		return favRepository.save(theFav);
 
 	}
-	
-
-
-
 
 	@Override
 	@Transactional

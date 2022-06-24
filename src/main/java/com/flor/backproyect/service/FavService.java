@@ -15,9 +15,5 @@ public interface FavService {
 	public void deleteByIdProductFavAndCategory(int idProductFav, String category);
 	
 	public Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category);
-
-
-
-
 	
 }
