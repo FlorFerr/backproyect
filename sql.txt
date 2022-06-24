@@ -11,7 +11,7 @@ primary key(id)
 CREATE TABLE fav(
 id_fav int primary key auto_increment,
 id_product_fav int,
-name varchar(30),
+name varchar(500),
 category varchar(10),
 user_id int references user(id)
 );
@@ -19,20 +19,21 @@ user_id int references user(id)
 CREATE TABLE cart(
 id int primary key auto_increment,
 id_cart int,
-name varchar(30),
+name varchar(500),
 category varchar(10),
 amount int,
 user_id int references user(id)
 );
 
 CREATE TABLE orden(
-idProductOrder int primary key,
-name varchar(30),
+id int primary key auto_increment,
+id_order int,
+name varchar(500),
 category varchar(10),
 amount int,
 user_id int references user(id)
 );
 
-alter table fav add foreign key(user_id) references user(id) ON UPDATE CASCADE on delete cascade;
+alter table fav add foreign key(user_id) references user(id);
 alter table cart add foreign key(user_id) references user(id);
-alter table orden add foreign key(user_id) references user(id);
+alter table orden add foreign key(user_id) references user (id);
