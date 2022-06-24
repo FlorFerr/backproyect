@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.flor.backproyect.dao.FavRepository;
 import com.flor.backproyect.entity.Fav;
 
-
-
 @Service
 public class FavServiceImpl implements FavService {
 	
@@ -25,32 +23,13 @@ public class FavServiceImpl implements FavService {
 	@Override
 	@Transactional
 	public List<Fav> getAll() {
-
 		return favRepository.findAll();	
 		}
 
 	@Override
 	@Transactional
 	public Fav saveFav(Fav theFav) {
-		
 		return favRepository.save(theFav);
-
-	}
-
-	@Override
-	@Transactional
-	public Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category) {
-
-		Optional<Fav> theFav = favRepository.findByIdProductFavAndCategory(idProductFav, category);
-		return theFav;
-	}
-
-	@Override
-	@Transactional
-	public void deleteByIdProductFavAndCategory(int idProductFav, String category) {
-		
-		favRepository.deleteByIdProductFavAndCategory(idProductFav, category);
-		
 	}
 
 	@Override

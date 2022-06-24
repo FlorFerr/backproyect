@@ -11,10 +11,6 @@ public interface FavService {
 	public List<Fav> getAll();
 	
 	public Fav saveFav(Fav theFav);
-
-	public void deleteByIdProductFavAndCategory(int idProductFav, String category);
-	
-	public Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category);
 	
 	public Optional<Fav> findByUserIdAndIdProductFavAndCategory(int userId, int idProductFav, String category);
 	

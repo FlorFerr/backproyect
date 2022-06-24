@@ -1,6 +1,7 @@
 package com.flor.backproyect.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,30 +33,24 @@ public class CartController {
 		userService = theUserService;
 	}
 	
-	@GetMapping("/users/cart")
+	@GetMapping("/cart")
 	public List<Cart> getAll(@RequestParam int userId){
 		User tempUser = userService.getUser(userId);
 		return tempUser.getCartItems();
 	}
 	
-	@PostMapping("/users/cart")
+	@PostMapping("/cart")
 	public Cart saveCart(@RequestParam int userId, @RequestBody Cart theCart) {
 		User tempUser = userService.getUser(userId);
 		tempUser.addCartItems(theCart);
 		cartService.saveCart(theCart);
 		return theCart;
 	}
-	
-	@PutMapping("users/cart")
+	/*
+	@PutMapping("/cart")
 	public void updateCartItem(@RequestParam int userId, @RequestParam int amount, @RequestParam String name) {
 		cartService.updateCartAmountByName(amount, name);
 	}
-	
-	@DeleteMapping("users/cart")
-	public void deleteCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
-		cartService.deleteByIdCartAndCategory(idCart, category);
-	}
-	
 	@DeleteMapping("users/cart/deleteAll")
 	public void deleteCart(@RequestParam int userId) {
 		cartService.deleteCart();
@@ -65,8 +60,64 @@ public class CartController {
 	public Cart findCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
 		
 		Cart cartItem = cartService.findByIdCartAndCategory(idCart, category);
-		return cartItem;
+		return cartItem;		
+	}
+	
+	*/
+	
+	@GetMapping("/cart/pruebita")
+	public Optional<Cart> findCartItemPrueba(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category){
 		
+		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
+		
+		return tempCart;
 		
 	}
+	
+	@DeleteMapping("/cart/prueba")
+	public void deleteCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
+		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
+		
+		if(tempCart.isEmpty()) {
+			throw new RuntimeException("El producto no existe");
+		}else {
+			cartService.deleteByUserIdAndIdCartAndCategory(userId, idCart, category);
+		}
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+

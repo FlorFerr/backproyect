@@ -53,7 +53,6 @@ public class FavController {
 			throw new RuntimeException("El producto ya está en favoritos");
 		}
 		return theFav;
-		
 	}
 	
 	@DeleteMapping("favorites")
@@ -64,9 +63,9 @@ public class FavController {
 			throw new RuntimeException("El producto no existe");
 		}else {
 			favService.deleteByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
-
 		}		
 	}
+	
 }
 
 	
