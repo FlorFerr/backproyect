@@ -16,3 +16,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	
 	Cart findByIdCartAndCategory(int idCart, String category);
 }
+
+
+//    @Query(nativeQuery = true,value = "update cart set amount = ?1  where name = ?2 ")

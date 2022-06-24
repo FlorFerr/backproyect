@@ -53,6 +53,18 @@ public class FavServiceImpl implements FavService {
 		
 	}
 
+	@Override
+	@Transactional
+	public Optional<Fav> findByUserIdAndIdProductFavAndCategory(int userId, int idProductFav, String category) {
+		return favRepository.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByUserIdAndIdProductFavAndCategory(int userId, int idProductFav, String category) {
+		favRepository.deleteByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+	}
+
 	
 
 	

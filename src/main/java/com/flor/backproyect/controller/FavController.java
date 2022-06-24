@@ -38,16 +38,18 @@ public class FavController {
 		return tempUser.getFavs();
 	}
 	
-
-	@DeleteMapping("users/favorites")
-	public void deleteFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
-		favService.deleteByIdProductFavAndCategory(idProductFav, category);
+	@GetMapping("prueba")
+	public Optional<Fav> getFavPrueba(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
+		
+		Optional<Fav> theFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+		return theFav;
+		
 	}
 	
 	@PostMapping("users/favorites")
 	public Fav guardarFav(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category, @RequestBody Fav theFav) {
 		
-		Optional<Fav> tempFav = favService.findByIdProductFavAndCategory(idProductFav, category);
+		Optional<Fav> tempFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
 		
 		if(tempFav.isEmpty()) {
 			User tempUser = userService.getUser(userId);
@@ -58,12 +60,14 @@ public class FavController {
 		}else {
 			throw new RuntimeException("El producto ya está en favoritos");
 		}
-		
-		
 		return theFav;
 		
 	}
 	
+	@DeleteMapping("users/favorites")
+	public void deleteFavPrueba(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
+		favService.deleteByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+	}
 	
 	
 

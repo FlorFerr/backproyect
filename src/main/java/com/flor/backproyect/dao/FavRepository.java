@@ -14,5 +14,8 @@ public interface FavRepository extends JpaRepository<Fav, Integer> {
 	
 	Optional<Fav> findByIdProductFavAndCategory(int idProductFav, String category);
 	
+	Optional<Fav> findByUserIdAndIdProductFavAndCategory(int userId, int idProductFav, String category);
 	
+	void deleteByUserIdAndIdProductFavAndCategory(int userId, int idProductFav, String category);
+
 }

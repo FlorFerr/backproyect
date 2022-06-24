@@ -26,12 +26,16 @@ public class Fav {
 	@Column(name="category")
 	private String category;
 			
-	public Fav() {}	
+	@Column(name="user_id")
+	private int userId;
+	
+	public Fav() {}
 
-	public Fav(int idProductFav, String name, String category) {
+	public Fav(int idProductFav, String name, String category, int userId) {
 		this.idProductFav = idProductFav;
 		this.name = name;
 		this.category = category;
+		this.userId = userId;
 	}
 
 	public int getId() {
@@ -66,10 +70,21 @@ public class Fav {
 		this.category = category;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
-		return "Fav [id=" + id + ", idProductFav=" + idProductFav + ", name=" + name + ", category=" + category + "]";
-	}
+		return "Fav [id=" + id + ", idProductFav=" + idProductFav + ", name=" + name + ", category=" + category
+				+ ", userId=" + userId + "]";
+	}	
+
+	
 
 	
 
