@@ -32,5 +32,12 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.save(theOrder);
 	}
 
+
+	@Override
+	@Transactional
+	public void deleteByUserId(int userId) {
+		orderRepository.deleteByUserId(userId);
+	}
+
 	
 }

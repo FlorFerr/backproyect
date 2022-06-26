@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,17 +31,14 @@ public class OrderController {
 		userService = theUserService;
 	}
 	
-	@GetMapping("/users/order")
+	@GetMapping("/order")
 	public List<Orden> getAll(@RequestParam int userId){
 		User tempUser = userService.getUser(userId);
 		
 		return tempUser.getOrderItems();
-		
 	}
 	
-	
-	
-	@PostMapping("/users/order")
+	@PostMapping("/order")
 	public Orden saveOrderPrueba(@RequestParam int userId) {
 		
 		User tempUser = userService.getUser(userId);
@@ -55,12 +53,17 @@ public class OrderController {
 				theOrder.setUserId(userId);
 			    theOrder.setAmount(cartItems.get(i).getAmount());
 			    theOrder.setCategory(cartItems.get(i).getCategory());
-			    theOrder.setName(cartItems.get(i).getName());
+			    theOrder.setName((Math.random() * ((100 - 1) + 1)) + 100);
 			    theOrder.setIdOrder(cartItems.get(i).getIdCart());
 			    orderService.saveOrder(theOrder);
 			    System.out.println(theOrder);
 			}
 		}
 		return null;
+	}
+	
+	@DeleteMapping("/order")
+	public void deleteOrder(@RequestParam int userId) {
+		orderService.deleteByUserId(userId);
 	}
 }

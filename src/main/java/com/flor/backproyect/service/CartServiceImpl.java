@@ -49,18 +49,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	@Transactional
-	public void deleteByIdCartAndCategory(int idCart, String category) {
-		cartRepository.deleteByIdCartAndCategory(idCart, category);
-	}
-
-	@Override
-	@Transactional
-	public Cart findByIdCartAndCategory(int idCart, String category) {
-		return cartRepository.findByIdCartAndCategory(idCart, category);
-	}
-
-	@Override
-	@Transactional
 	public Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category) {
 		return cartRepository.findByUserIdAndIdCartAndCategory(userId, idCart, category);
 	}
@@ -69,5 +57,11 @@ public class CartServiceImpl implements CartService {
 	@Transactional
 	public void deleteByUserIdAndIdCartAndCategory(int userId, int idCart, String category) {
 		cartRepository.deleteByUserIdAndIdCartAndCategory(userId, idCart, category);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByUserId(int userId) {
+		cartRepository.deleteByUserId(userId);
 	}
 }

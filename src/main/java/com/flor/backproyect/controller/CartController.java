@@ -40,10 +40,20 @@ public class CartController {
 	}
 	
 	@PostMapping("/cart")
-	public Cart saveCart(@RequestParam int userId, @RequestBody Cart theCart) {
-		User tempUser = userService.getUser(userId);
-		tempUser.addCartItems(theCart);
-		cartService.saveCart(theCart);
+	public Cart saveCart(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category, @RequestBody Cart theCart) {
+		
+		Optional<Cart> cartItem = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
+		
+		
+		if(cartItem.isPresent()) {
+			throw new RuntimeException("El producto ya existe");
+
+		}else {
+			User tempUser = userService.getUser(userId);
+			tempUser.addCartItems(theCart);
+			cartService.saveCart(theCart);
+		}
+		
 		return theCart;
 	}
 	/*
@@ -51,26 +61,7 @@ public class CartController {
 	public void updateCartItem(@RequestParam int userId, @RequestParam int amount, @RequestParam String name) {
 		cartService.updateCartAmountByName(amount, name);
 	}
-	@DeleteMapping("users/cart/deleteAll")
-	public void deleteCart(@RequestParam int userId) {
-		cartService.deleteCart();
-	}
 	
-	@GetMapping("users/cartitem")
-	public Cart findCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
-		
-		Cart cartItem = cartService.findByIdCartAndCategory(idCart, category);
-		return cartItem;		
-	}
-	
-		@GetMapping("/cart/pruebita")
-	public Optional<Cart> findCartItemPrueba(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category){
-		
-		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
-		
-		return tempCart;
-		
-	}
 	
 	*/
 	
@@ -85,6 +76,10 @@ public class CartController {
 		}
 	}
 	
+	@DeleteMapping("/cart/deletecart")
+	public void deleteCart(@RequestParam int userId){
+			cartService.deleteByUserId(userId);
+	}
 
 	
 	

@@ -21,7 +21,7 @@ public class Orden {
 	private int idOrder;
 	
 	@Column(name="name")
-	private String name;
+	private double name;
 	
 	@Column(name="amount")
 	private int amount;
@@ -35,7 +35,7 @@ public class Orden {
 	
 	public Orden () {}
 
-	public Orden(int idOrder, String name, int amount, String category, int userId) {
+	public Orden(int idOrder, double name, int amount, String category, int userId) {
 		this.idOrder = idOrder;
 		this.name = name;
 		this.amount = amount;
@@ -68,12 +68,12 @@ public class Orden {
 	}
 
 
-	public String getName() {
+	public double getName() {
 		return name;
 	}
 
 
-	public void setName(String name) {
+	public void setName(double name) {
 		this.name = name;
 	}
 

@@ -38,8 +38,8 @@ public class FavController {
 		return tempUser.getFavs();
 	}
 	
-	@PostMapping("favorites")
-	public Fav saveFvorite(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category, @RequestBody Fav theFav) {
+	@PostMapping("/favorites")
+	public Fav saveFavorite(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category, @RequestBody Fav theFav) {
 		
 		Optional<Fav> tempFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
 		
@@ -55,7 +55,7 @@ public class FavController {
 		return theFav;
 	}
 	
-	@DeleteMapping("favorites")
+	@DeleteMapping("/favorites")
 	public void deleteFavorite(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
 		Optional<Fav> tempFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
 		

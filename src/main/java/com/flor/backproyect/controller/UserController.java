@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,11 +32,10 @@ public class UserController {
 	@GetMapping("/users")
 	public List<User> findAll(){
 		return userService.getAll();
-		
 	}
 	
-	@GetMapping("/users/{userId}")
-	public User getUser(@PathVariable int userId) {
+	@GetMapping("/users/find")
+	public User getUser(@RequestParam int userId) {
 		
 		User theUser = userService.getUser(userId);
 		
@@ -53,7 +51,6 @@ public class UserController {
 		
 		Optional<User> user = userService.findByEmailAndPass(theUser.getEmail(), theUser.getPass());
 		
-		
 		if(user.isPresent()) {
 			if(user.get().getPass() == theUser.getPass()) {
 				return user.get().getId();
@@ -64,7 +61,7 @@ public class UserController {
 		return user.get().getId();
 	}
 	
-	@PostMapping("users")
+	@PostMapping("/users")
 	public User saveUser(@RequestBody User theUser) {
 		
 		theUser.setId(0);
@@ -88,10 +85,8 @@ public class UserController {
 	
 	@PutMapping("users")
 	public User updateUser(@RequestBody User theUser) {
-		
 		userService.saveUser(theUser);
 		return theUser;
-		
 	}
 
 }

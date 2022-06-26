@@ -13,18 +13,14 @@ public interface CartService {
 
 	public int updateCartAmountByName(int amount, String name);
 	
-	public void deleteByIdCartAndCategory(int idCart, String category);
-
 	public void deleteCart();
-	
-	public Cart findByIdCartAndCategory(int idCart, String category);
-	
+		
 	public Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 	
 	public void deleteByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 
+	public void deleteByUserId(int userId);
 
-	
 	
 
 }

@@ -13,14 +13,12 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	@Modifying
     @Query(nativeQuery = true,value = "update cart set amount = ?1  where name = ?2 ")
 	int updateCartAmountByName(int amount,String name);
-	
-	void deleteByIdCartAndCategory(int idCart, String category);
-	
-	Cart findByIdCartAndCategory(int idCart, String category);
-	
+		
 	Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 	
 	void deleteByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
+	
+	void deleteByUserId(int userId);
 }
 
 
