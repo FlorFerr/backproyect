@@ -23,16 +23,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> getAll() {
-
 		return userRepository.findAll();
 	}
 
 	@Override
 	@Transactional
 	public User getUser(int userId) {
-		
 		Optional<User> result = userRepository.findById(userId);
-		
 		User theUser = null;
 		if(result.isPresent()) {
 			theUser = result.get();
@@ -40,32 +37,25 @@ public class UserServiceImpl implements UserService {
 		else {
 			throw new RuntimeException("User not found");
 		}
-		
 		return theUser;
 	}
 
 	@Override
 	@Transactional
 	public User saveUser(User theUser) {
-		
 		return userRepository.save(theUser);
-
 	}
 
 	@Override
 	@Transactional
 	public void deleteUser(int userId) {
 		userRepository.deleteById(userId);
-
 	}
 
 	@Override
 	@Transactional
 	public Optional<User> findByEmailAndPass(String email, String pass) {
-		
 		Optional<User> theUser = userRepository.findByEmailAndPass(email, pass);
-		
 		return theUser;
 	}
-
 }

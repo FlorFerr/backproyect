@@ -36,21 +36,16 @@ public class UserController {
 	
 	@GetMapping("/users/find")
 	public User getUser(@RequestParam int userId) {
-		
 		User theUser = userService.getUser(userId);
-		
 		if(theUser == null) {
 			throw new RuntimeException("User id not found");
 		}
-		
 		return theUser;
 	}
 
 	@PostMapping("login")
 	public int login(@RequestBody User theUser) {
-		
 		Optional<User> user = userService.findByEmailAndPass(theUser.getEmail(), theUser.getPass());
-		
 		if(user.isPresent()) {
 			if(user.get().getPass() == theUser.getPass()) {
 				return user.get().getId();
@@ -63,24 +58,9 @@ public class UserController {
 	
 	@PostMapping("/users")
 	public User saveUser(@RequestBody User theUser) {
-		
 		theUser.setId(0);
 		userService.saveUser(theUser);
-		
 		return theUser;
-	}
-	
-	@DeleteMapping("/users")
-	public String deleteUser(@RequestParam int userId) {
-	
-		User tempUser = userService.getUser(userId);
-		
-		if(tempUser == null) {
-			throw new RuntimeException("User not found");
-		}
-		
-		userService.deleteUser(userId);
-		return "Delete";
 	}
 	
 	@PutMapping("users")
@@ -88,7 +68,16 @@ public class UserController {
 		userService.saveUser(theUser);
 		return theUser;
 	}
-
+	
+	@DeleteMapping("/users")
+	public String deleteUser(@RequestParam int userId) {
+		User tempUser = userService.getUser(userId);
+		if(tempUser == null) {
+			throw new RuntimeException("User not found");
+		}
+		userService.deleteUser(userId);
+		return "Delete user: " + userId;
+	}
 }
 
 	

@@ -53,62 +53,49 @@ public class User {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getPass() {
 		return pass;
 	}
 
-
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
 
 	public List<Fav> getFavs() {
 		return favs;
 	}
 
-
 	public void setFavs(List<Fav> favs) {
 		this.favs = favs;
 	}
-	
-	
 	
 	public List<Cart> getCartItems() {
 		return cartItems;
 	}
 
-
 	public void setCartItems(List<Cart> cartItems) {
 		this.cartItems = cartItems;
 	}
-
 
 	public List<Orden> getOrderItems() {
 		return orderItems;
 	}
 
-
 	public void setOrderItems(List<Orden> orderItems) {
 		this.orderItems = orderItems;
 	}
-
 
 	@Override
 	public String toString() {
@@ -135,5 +122,4 @@ public class User {
 		}
 		orderItems.add(theOrder);
 	}
-		
 }

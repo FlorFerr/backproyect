@@ -11,8 +11,8 @@ import com.flor.backproyect.entity.Cart;
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 	
 	@Modifying
-    @Query(nativeQuery = true,value = "update cart set amount = ?1  where name = ?2 ")
-	int updateCartAmountByName(int amount,String name);
+    @Query(nativeQuery = true,value = "update cart set quantity = ?  where user_id = ? and id_cart = ? and category = ?  ")
+	int updateCartItemQuantity(int quantity,int userId, int idCart, String category);
 		
 	Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 	
@@ -20,6 +20,3 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	
 	void deleteByUserId(int userId);
 }
-
-
-//    @Query(nativeQuery = true,value = "update cart set amount = ?1  where name = ?2 ")

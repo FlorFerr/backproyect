@@ -39,9 +39,9 @@ public class FavController {
 	}
 	
 	@PostMapping("/favorites")
-	public Fav saveFavorite(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category, @RequestBody Fav theFav) {
+	public Fav saveFavorite(@RequestParam int userId, @RequestParam int idFav, @RequestParam String category, @RequestBody Fav theFav) {
 		
-		Optional<Fav> tempFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+		Optional<Fav> tempFav = favService.findByUserIdAndIdFavAndCategory(userId, idFav, category);
 		
 		if(tempFav.isEmpty()) {
 			User tempUser = userService.getUser(userId);
@@ -56,16 +56,15 @@ public class FavController {
 	}
 	
 	@DeleteMapping("/favorites")
-	public void deleteFavorite(@RequestParam int userId, @RequestParam int idProductFav, @RequestParam String category) {
-		Optional<Fav> tempFav = favService.findByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+	public void deleteFavorite(@RequestParam int userId, @RequestParam int idFav, @RequestParam String category) {
+		Optional<Fav> tempFav = favService.findByUserIdAndIdFavAndCategory(userId, idFav, category);
 		
 		if(tempFav.isEmpty()) {
 			throw new RuntimeException("El producto no existe");
 		}else {
-			favService.deleteByUserIdAndIdProductFavAndCategory(userId, idProductFav, category);
+			favService.deleteByUserIdAndIdFavAndCategory(userId, idFav, category);
 		}		
 	}
-	
 }
 
 	

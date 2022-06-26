@@ -19,25 +19,22 @@ public class Cart {
 	@Column(name="id_cart")
 	private int idCart;
 	
-	@Column(name="name")
-	private String name;
-	
 	@Column(name="category")
 	private String category;
 	
-	@Column(name="amount")
-	private int amount;
+	@Column(name="quantity")
+	private int quantity;
 	
 	@Column(name="user_id")
 	private int userId;
 	
 	public Cart() {}
 
-	public Cart(int idCart, String name, String category, int amount, int userId) {
+	public Cart(int idCart, String category, int quantity, int userId) {
+		super();
 		this.idCart = idCart;
-		this.name = name;
 		this.category = category;
-		this.amount = amount;
+		this.quantity = quantity;
 		this.userId = userId;
 	}
 
@@ -57,14 +54,6 @@ public class Cart {
 		this.idCart = idCart;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getCategory() {
 		return category;
 	}
@@ -73,12 +62,12 @@ public class Cart {
 		this.category = category;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getUserId() {
@@ -91,8 +80,7 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", idCart=" + idCart + ", name=" + name + ", category=" + category + ", amount="
-				+ amount + ", userId=" + userId + "]";
+		return "Cart [id=" + id + ", idCart=" + idCart + ", category=" + category + ", quantity=" + quantity
+				+ ", userId=" + userId + "]";
 	}
-
 }

@@ -34,7 +34,6 @@ public class OrderController {
 	@GetMapping("/order")
 	public List<Orden> getAll(@RequestParam int userId){
 		User tempUser = userService.getUser(userId);
-		
 		return tempUser.getOrderItems();
 	}
 	
@@ -46,24 +45,27 @@ public class OrderController {
 		List<Cart> cartItems = tempUser.getCartItems();
 		
 		if(cartItems.isEmpty()) {
-			throw new RuntimeException("No hay productos en el carrito");
+			throw new RuntimeException("Cart empty");
 		}else {
 			for (int i = 0; i < cartItems.size(); ++i) {
 				Orden theOrder = new Orden();
 				theOrder.setUserId(userId);
-			    theOrder.setAmount(cartItems.get(i).getAmount());
+			    theOrder.setQuantity(cartItems.get(i).getQuantity());
 			    theOrder.setCategory(cartItems.get(i).getCategory());
-			    theOrder.setName((Math.random() * ((100 - 1) + 1)) + 100);
 			    theOrder.setIdOrder(cartItems.get(i).getIdCart());
 			    orderService.saveOrder(theOrder);
-			    System.out.println(theOrder);
 			}
 		}
 		return null;
 	}
 	
 	@DeleteMapping("/order")
-	public void deleteOrder(@RequestParam int userId) {
+	public String deleteOrder(@RequestParam int userId) {
+		User theUser = userService.getUser(userId);
+		if(theUser.getCartItems().isEmpty()) {
+			throw new RuntimeException("Cart empty");
+		}else {
 		orderService.deleteByUserId(userId);
+		return "Delete order user: " + userId;}
 	}
 }

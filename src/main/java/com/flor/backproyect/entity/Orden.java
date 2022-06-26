@@ -20,11 +20,8 @@ public class Orden {
 	@Column(name="id_order")
 	private int idOrder;
 	
-	@Column(name="name")
-	private double name;
-	
-	@Column(name="amount")
-	private int amount;
+	@Column(name="quantity")
+	private int quantity;
 	
 	@Column(name="category")
 	private String category;
@@ -32,22 +29,13 @@ public class Orden {
 	@Column(name="user_id")
 	private int userId;
 	
-	
 	public Orden () {}
 
-	public Orden(int idOrder, double name, int amount, String category, int userId) {
+	public Orden(int idOrder, int quantity, String category, int userId) {
+		super();
 		this.idOrder = idOrder;
-		this.name = name;
-		this.amount = amount;
+		this.quantity = quantity;
 		this.category = category;
-		this.userId = userId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -67,43 +55,36 @@ public class Orden {
 		this.idOrder = idOrder;
 	}
 
-
-	public double getName() {
-		return name;
+	public int getQuantity() {
+		return quantity;
 	}
 
-
-	public void setName(double name) {
-		this.name = name;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-
-
-	public int getAmount() {
-		return amount;
-	}
-
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
 
 	public String getCategory() {
 		return category;
 	}
 
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	@Override
 	public String toString() {
-		return "Orden [id=" + id + ", idOrder=" + idOrder + ", name=" + name + ", amount=" + amount + ", category="
-				+ category + ", userId=" + userId + "]";
+		return "Orden [id=" + id + ", idOrder=" + idOrder + ", quantity=" + quantity + ", category=" + category
+				+ ", userId=" + userId + "]";
 	}
-	
+
 }
 
 	

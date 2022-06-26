@@ -11,7 +11,7 @@ public interface CartService {
 	
 	public Cart saveCart(Cart cartItems);
 
-	public int updateCartAmountByName(int amount, String name);
+	public int updateCartItemQuantity(int quantity, int userId, int idCart, String category);
 	
 	public void deleteCart();
 		
@@ -20,7 +20,5 @@ public interface CartService {
 	public void deleteByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 
 	public void deleteByUserId(int userId);
-
-	
 
 }

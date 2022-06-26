@@ -23,23 +23,14 @@ public class CartServiceImpl implements CartService {
 	@Override
 	@Transactional
 	public List<Cart> getAll() {
-
 		return cartRepository.findAll();	
-		}
+	}
 
 	@Override
 	@Transactional
 	public Cart saveCart(Cart cartItems) {
-		
 		return cartRepository.save(cartItems);
 	}
-	
-	@Override
-	@Transactional
-    public int updateCartAmountByName(int amount,String name){
-		
-		return cartRepository.updateCartAmountByName(amount, name);
-    }
 
 	@Override
 	@Transactional
@@ -63,5 +54,11 @@ public class CartServiceImpl implements CartService {
 	@Transactional
 	public void deleteByUserId(int userId) {
 		cartRepository.deleteByUserId(userId);
+	}
+
+	@Override
+	@Transactional
+	public int updateCartItemQuantity(int quantity, int userId, int idCart, String category) {
+		return cartRepository.updateCartItemQuantity(quantity, userId, idCart, category);
 	}
 }

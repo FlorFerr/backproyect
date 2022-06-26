@@ -9,19 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="fav")
+@Table(name="favorites")
 public class Fav {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="id_fav")
+	@Column(name="id")
 	private int id;
 	
-	@Column(name="id_product_fav")
-	private int idProductFav;
-	
-	@Column(name="name")
-	private String name;
+	@Column(name="id_fav")
+	private int idFav;
 	
 	@Column(name="category")
 	private String category;
@@ -31,9 +28,9 @@ public class Fav {
 	
 	public Fav() {}
 
-	public Fav(int idProductFav, String name, String category, int userId) {
-		this.idProductFav = idProductFav;
-		this.name = name;
+	public Fav(int idFav, String category, int userId) {
+		super();
+		this.idFav = idFav;
 		this.category = category;
 		this.userId = userId;
 	}
@@ -46,20 +43,12 @@ public class Fav {
 		this.id = id;
 	}
 
-	public int getIdProductFav() {
-		return idProductFav;
+	public int getIdFav() {
+		return idFav;
 	}
 
-	public void setIdProductFav(int idProductFav) {
-		this.idProductFav = idProductFav;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setIdFav(int idFav) {
+		this.idFav = idFav;
 	}
 
 	public String getCategory() {
@@ -80,22 +69,6 @@ public class Fav {
 
 	@Override
 	public String toString() {
-		return "Fav [id=" + id + ", idProductFav=" + idProductFav + ", name=" + name + ", category=" + category
-				+ ", userId=" + userId + "]";
+		return "Fav [id=" + id + ", idFav=" + idFav + ", category=" + category + ", userId=" + userId + "]";
 	}	
-
-	
-
-	
-
-	
-
-
-	
-
-
-
-
-
-	
 }

@@ -19,7 +19,6 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository = theOrderRepository;
 	}
 
-	
 	@Override
 	@Transactional
 	public List<Orden> getAll(int userId) {
@@ -32,12 +31,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.save(theOrder);
 	}
 
-
 	@Override
 	@Transactional
 	public void deleteByUserId(int userId) {
 		orderRepository.deleteByUserId(userId);
 	}
-
-	
 }

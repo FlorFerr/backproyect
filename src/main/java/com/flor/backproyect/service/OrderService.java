@@ -12,8 +12,4 @@ public interface OrderService {
 	
 	public void deleteByUserId(int userId);
 
-	
-	
-
-	
 }
