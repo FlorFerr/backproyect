@@ -36,4 +36,5 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteByUserId(int userId) {
 		orderRepository.deleteByUserId(userId);
 	}
+
 }

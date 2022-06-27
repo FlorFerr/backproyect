@@ -1,5 +1,7 @@
 package com.flor.backproyect.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,14 +31,17 @@ public class Orden {
 	@Column(name="user_id")
 	private int userId;
 	
+	@Column(name="fecha")
+	private Date fecha;
+	
 	public Orden () {}
 
-	public Orden(int idOrder, int quantity, String category, int userId) {
-		super();
+	public Orden(int idOrder, int quantity, String category, int userId, Date fecha) {
 		this.idOrder = idOrder;
 		this.quantity = quantity;
 		this.category = category;
 		this.userId = userId;
+		this.fecha = fecha;
 	}
 
 	public int getId() {
@@ -79,10 +84,18 @@ public class Orden {
 		this.userId = userId;
 	}
 
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
 	@Override
 	public String toString() {
 		return "Orden [id=" + id + ", idOrder=" + idOrder + ", quantity=" + quantity + ", category=" + category
-				+ ", userId=" + userId + "]";
+				+ ", userId=" + userId + ", fecha=" + fecha + "]";
 	}
 
 }

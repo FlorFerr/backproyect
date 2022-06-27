@@ -1,5 +1,6 @@
 package com.flor.backproyect.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,16 @@ public class OrderController {
 				
 		List<Cart> cartItems = tempUser.getCartItems();
 		
+		
+		Date fecha = new Date();
+		
 		if(cartItems.isEmpty()) {
 			throw new RuntimeException("Cart empty");
 		}else {
 			for (int i = 0; i < cartItems.size(); ++i) {
 				Orden theOrder = new Orden();
 				theOrder.setUserId(userId);
+				theOrder.setFecha(fecha);
 			    theOrder.setQuantity(cartItems.get(i).getQuantity());
 			    theOrder.setCategory(cartItems.get(i).getCategory());
 			    theOrder.setIdOrder(cartItems.get(i).getIdCart());
