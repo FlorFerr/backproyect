@@ -12,4 +12,6 @@ public interface OrderService {
 	
 	public void deleteByUserId(int userId);
 	
+	public List<Orden> getByNumOrder(long numOrder);
+
 }

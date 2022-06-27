@@ -73,4 +73,10 @@ public class OrderController {
 		orderService.deleteByUserId(userId);
 		return "Delete order user: " + userId;}
 	}
+	
+	@GetMapping("/order/num_order")
+	public List<Orden> getOrderByNum(@RequestParam long numOrder) {
+		return orderService.getByNumOrder(numOrder);
+		
+	}
 }
