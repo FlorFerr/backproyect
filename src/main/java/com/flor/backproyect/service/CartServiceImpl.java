@@ -34,12 +34,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	@Transactional
-	public void deleteCart() {
-		cartRepository.deleteAll();
-	}
-
-	@Override
-	@Transactional
 	public Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category) {
 		return cartRepository.findByUserIdAndIdCartAndCategory(userId, idCart, category);
 	}

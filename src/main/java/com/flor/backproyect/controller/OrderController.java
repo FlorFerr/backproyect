@@ -1,6 +1,7 @@
 package com.flor.backproyect.controller;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.flor.backproyect.service.UserService;
 public class OrderController {
 	
 	private OrderService orderService;
-	private UserService userService;	
+	private UserService userService;
 	
 	@Autowired
 	public OrderController(OrderService theOrderService, UserService theUserService) {
@@ -44,22 +45,21 @@ public class OrderController {
 		User tempUser = userService.getUser(userId);
 				
 		List<Cart> cartItems = tempUser.getCartItems();
-		
-		
-		Date fecha = new Date();
-		
+				
+		Calendar calendario = new GregorianCalendar();
+						
 		if(cartItems.isEmpty()) {
 			throw new RuntimeException("Cart empty");
 		}else {
-			for (int i = 0; i < cartItems.size(); ++i) {
+			for (Cart cartItem : cartItems) {
 				Orden theOrder = new Orden();
 				theOrder.setUserId(userId);
-				theOrder.setFecha(fecha);
-			    theOrder.setQuantity(cartItems.get(i).getQuantity());
-			    theOrder.setCategory(cartItems.get(i).getCategory());
-			    theOrder.setIdOrder(cartItems.get(i).getIdCart());
-			    orderService.saveOrder(theOrder);
-			}
+				theOrder.setNumOrder(calendario.getTimeInMillis());
+			    theOrder.setQuantity(cartItem.getQuantity());
+			    theOrder.setCategory(cartItem.getCategory());
+			    theOrder.setIdOrder(cartItem.getIdCart());
+			    orderService.saveOrder(theOrder); 
+			}			
 		}
 		return null;
 	}

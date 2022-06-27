@@ -12,9 +12,7 @@ public interface CartService {
 	public Cart saveCart(Cart cartItems);
 
 	public int updateCartItemQuantity(int quantity, int userId, int idCart, String category);
-	
-	public void deleteCart();
-		
+			
 	public Optional<Cart> findByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
 	
 	public void deleteByUserIdAndIdCartAndCategory(int userId, int idCart, String category);
