@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,39 +22,34 @@ import com.flor.backproyect.service.UserService;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-	
-	private UserService userService;
-	
 	@Autowired
-	public UserController(UserService theUserService) {
-		userService = theUserService;	
-	}
+	private UserService userService;
 	
 	@GetMapping("/users")
 	public List<User> findAll(){
 		return userService.getAll();
 	}
 	
-	@GetMapping("/users/find")
-	public User getUser(@RequestParam int userId) {
+	@GetMapping("/users/find/{userId}")
+	public User getUser(@PathVariable int userId) {
 		User theUser = userService.getUser(userId);
 		if(theUser == null) {
-			throw new RuntimeException("User id not found");
+			throw new RuntimeException("Usuario no encontrado");
 		}
 		return theUser;
 	}
 
-	@PostMapping("login")
-	public int login(@RequestBody User theUser) {
+	@PostMapping("/login")
+	public Optional<User> login(@RequestBody User theUser) {
 		Optional<User> user = userService.findByEmailAndPass(theUser.getEmail(), theUser.getPass());
 		if(user.isPresent()) {
 			if(user.get().getPass() == theUser.getPass()) {
-				return user.get().getId();
+				return user;
 			}
 		}else {
 			throw new RuntimeException("Usuario o contraseña incorrecta");
 			}
-		return user.get().getId();
+		return user;
 	}
 	
 	@PostMapping("/users")
@@ -63,17 +59,11 @@ public class UserController {
 		return theUser;
 	}
 	
-	@PutMapping("users")
-	public User updateUser(@RequestBody User theUser) {
-		userService.saveUser(theUser);
-		return theUser;
-	}
-	
-	@DeleteMapping("/users")
-	public String deleteUser(@RequestParam int userId) {
+	@DeleteMapping("/users/{userId}")
+	public String deleteUser(@PathVariable int userId) {
 		User tempUser = userService.getUser(userId);
 		if(tempUser == null) {
-			throw new RuntimeException("User not found");
+			throw new RuntimeException("Usuario no encontrado");
 		}
 		userService.deleteUser(userId);
 		return "Delete user: " + userId;
