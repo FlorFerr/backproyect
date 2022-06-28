@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,17 +25,14 @@ import com.flor.backproyect.service.UserService;
 @RequestMapping("/api")
 public class CartController {
 	
+	@Autowired
 	private CartService cartService;
-	private UserService userService;
 	
 	@Autowired
-	public CartController(CartService theCartService, UserService theUserService) {
-		cartService = theCartService;
-		userService = theUserService;
-	}
+	private UserService userService;
 	
-	@GetMapping("/cart")
-	public List<Cart> getAll(@RequestParam int userId){
+	@GetMapping("/cart/{userId}")
+	public List<Cart> getAll(@PathVariable int userId){
 		User tempUser = userService.getUser(userId);
 		return tempUser.getCartItems();
 	}
@@ -68,8 +66,8 @@ public class CartController {
 		}
 	}
 	
-	@DeleteMapping("/cart/deletecart")
-	public void deleteCart(@RequestParam int userId){
+	@DeleteMapping("/cart/deletecart/{userId}")
+	public void deleteCart(@PathVariable int userId){
 			cartService.deleteByUserId(userId);
 	}
 }

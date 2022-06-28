@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +24,14 @@ import com.flor.backproyect.service.UserService;
 @RequestMapping("/api")
 public class FavController {
 	
+	@Autowired
 	private FavService favService;
-	private UserService userService;
 	
 	@Autowired
-	public FavController(FavService theFavService, UserService theUserService) {
-		favService = theFavService;		
-		userService = theUserService;
-	}
+	private UserService userService;
 	
-	@GetMapping("/favorites")
-	public List<Fav> getAllFavorites(@RequestParam int userId){
+	@GetMapping("/favorites/{userId}")
+	public List<Fav> getAllFavorites(@PathVariable int userId){
 		User tempUser = userService.getUser(userId);
 		return tempUser.getFavs();
 	}

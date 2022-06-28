@@ -38,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public List<Orden> getByNumOrder(long numOrder) {
 		return orderRepository.getByNumOrder(numOrder);
 	}
