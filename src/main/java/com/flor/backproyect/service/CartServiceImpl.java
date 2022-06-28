@@ -55,4 +55,5 @@ public class CartServiceImpl implements CartService {
 	public int updateCartItemQuantity(int quantity, int userId, int idCart, String category) {
 		return cartRepository.updateCartItemQuantity(quantity, userId, idCart, category);
 	}
+
 }
