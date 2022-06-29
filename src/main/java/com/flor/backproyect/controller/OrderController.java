@@ -39,7 +39,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order/{userId}")
-	public String saveOrder(@PathVariable int userId) {
+	public long saveOrder(@PathVariable int userId) {
 		
 		Optional<User> theUser = userService.findById(userId);
 				
@@ -60,7 +60,7 @@ public class OrderController {
 			    orderService.save(theOrder);
 			}			
 		}
-		return "Orden generada";
+		return calendario.getTimeInMillis();
 	}
 	
 	@DeleteMapping("/order/{userId}")
