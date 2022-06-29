@@ -1,6 +1,5 @@
 package com.flor.backproyect.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,33 +7,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="favorites")
-public class Fav {
+@Table(name="orders")
+public class Order {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="id_fav")
-	private int idFav;
+	@Column(name="product_id")
+	private int productId;
+	
+	@Column(name="quantity")
+	private int quantity;
 	
 	@Column(name="category")
 	private String category;
-			
+	
 	@Column(name="user_id")
 	private int userId;
 	
-	public Fav() {}
+	@Column(name="n_order")
+	private long numOrder;
 
-	public Fav(int idFav, String category, int userId) {
-		super();
-		this.idFav = idFav;
-		this.category = category;
-		this.userId = userId;
-	}
-
+	public Order() {}
 	public int getId() {
 		return id;
 	}
@@ -43,12 +41,20 @@ public class Fav {
 		this.id = id;
 	}
 
-	public int getIdFav() {
-		return idFav;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setIdFav(int idFav) {
-		this.idFav = idFav;
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getCategory() {
@@ -67,8 +73,20 @@ public class Fav {
 		this.userId = userId;
 	}
 
+	public long getNumOrder() {
+		return numOrder;
+	}
+
+	public void setNumOrder(long numOrder) {
+		this.numOrder = numOrder;
+	}
+
 	@Override
 	public String toString() {
-		return "Fav [id=" + id + ", idFav=" + idFav + ", category=" + category + ", userId=" + userId + "]";
-	}	
+		return "Order [id=" + id + ", productId=" + productId + ", quantity=" + quantity + ", category=" + category
+				+ ", userId=" + userId + ", numOrder=" + numOrder + "]";
+	}
 }
+
+	
+	

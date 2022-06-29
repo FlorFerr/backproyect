@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flor.backproyect.dao.ICartRepository;
+import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.User;
-import com.flor.backproyect.service.CartService;
-import com.flor.backproyect.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -26,48 +26,52 @@ import com.flor.backproyect.service.UserService;
 public class CartController {
 	
 	@Autowired
-	private CartService cartService;
+	private ICartRepository cartService;
 	
 	@Autowired
-	private UserService userService;
+	private IUserRepository userService;
 	
 	@GetMapping("/cart/{userId}")
 	public List<Cart> getAll(@PathVariable int userId){
-		User tempUser = userService.getUser(userId);
-		return tempUser.getCartItems();
+		Optional<User> theUser = userService.findById(userId);
+		return theUser.get().getCartItems();
 	}
 	
-	@PostMapping("/cart")
-	public Cart saveCart(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category, @RequestBody Cart theCart) {
-		Optional<Cart> cartItem = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
+	@PostMapping("/cart/{userId}")
+	public Cart saveCart(@PathVariable int userId, @RequestParam int productId, @RequestParam String category, @RequestBody Cart theCart) {
+		Optional<Cart> cartItem = cartService.findCartItem(userId, productId, category);
 		if(cartItem.isPresent()) {
 			throw new RuntimeException("El producto ya existe");
 
 		}else {
-			User tempUser = userService.getUser(userId);
-			tempUser.addCartItems(theCart);
-			cartService.saveCart(theCart);
+			Optional<User> theUser = userService.findById(userId);
+			
+			theUser.get().addCartItems(theCart);
+	
+			cartService.save(theCart);
 		}
 		return theCart;
 	}
 	
-	@PutMapping("/cart")
-	public void updateCartItem(@RequestParam int userId, @RequestParam int quantity, @RequestParam int idCart, @RequestParam String category) {
-		cartService.updateCartItemQuantity(quantity, userId, idCart, category);
+	@PutMapping("/cart/{userId}")
+	public void updateCartItem(@PathVariable int userId, @RequestParam int quantity, @RequestParam int productId, @RequestParam String category) {
+		cartService.updateQuantity(quantity, userId, productId, category);
 	}
 	
-	@DeleteMapping("/cart")
-	public void deleteCartItem(@RequestParam int userId, @RequestParam int idCart, @RequestParam String category) {
-		Optional<Cart> tempCart = cartService.findByUserIdAndIdCartAndCategory(userId, idCart, category);
-		if(tempCart.isEmpty()) {
+	@DeleteMapping("/cart/{userId}")
+	public String deleteCartItem(@PathVariable int userId, @RequestParam int productId, @RequestParam String category) {
+		Optional<Cart> theCart = cartService.findCartItem(userId, productId, category);
+		if(theCart.isEmpty()) {
 			throw new RuntimeException("El producto no existe");
 		}else {
-			cartService.deleteByUserIdAndIdCartAndCategory(userId, idCart, category);
+			cartService.deleteCartItem(userId, productId, category);
+			return "CartItem eliminado";
 		}
 	}
 	
 	@DeleteMapping("/cart/deletecart/{userId}")
-	public void deleteCart(@PathVariable int userId){
+	public String deleteCart(@PathVariable int userId){
 			cartService.deleteByUserId(userId);
+			return "Cart vacío";
 	}
 }

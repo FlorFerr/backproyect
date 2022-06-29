@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.flor.backproyect.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface IUserRepository extends JpaRepository<User, Integer> {
 	
-	Optional<User> findByEmailAndPass(String email, String pass);	
+	public Optional<User> findByEmailAndPass(String email, String pass);	
 }

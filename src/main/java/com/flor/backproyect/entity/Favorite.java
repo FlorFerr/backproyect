@@ -1,5 +1,6 @@
 package com.flor.backproyect.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cart")
-public class Cart {
+@Table(name="favorites")
+public class Favorite {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -21,14 +22,11 @@ public class Cart {
 	
 	@Column(name="category")
 	private String category;
-	
-	@Column(name="quantity")
-	private int quantity;
-	
+			
 	@Column(name="user_id")
 	private int userId;
-	
-	public Cart () {}
+
+	public Favorite() {}
 
 	public int getId() {
 		return id;
@@ -54,14 +52,6 @@ public class Cart {
 		this.category = category;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	public int getUserId() {
 		return userId;
 	}
@@ -72,8 +62,8 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", productId=" + productId + ", category=" + category + ", quantity=" + quantity
-				+ ", userId=" + userId + "]";
+		return "Favorite [id=" + id + ", productId=" + productId + ", category=" + category + ", userId=" + userId
+				+ "]";
 	}
 	
 }

@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.dao.OrderRepository;
-import com.flor.backproyect.dao.UserRepository;
+import com.flor.backproyect.dao.IOrderRepository;
+import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Cart;
-import com.flor.backproyect.entity.Orden;
+import com.flor.backproyect.entity.Order;
 import com.flor.backproyect.entity.User;
 
 @CrossOrigin
@@ -27,23 +27,23 @@ import com.flor.backproyect.entity.User;
 public class OrderController {
 	
 	@Autowired
-	private OrderRepository orderRepository;
+	private IOrderRepository orderService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userService;
 	
 	@GetMapping("/order/{userId}")
-	public List<Orden> getAll(@PathVariable int userId){
-		Optional<User> tempUser = userRepository.findById(userId);
-		return tempUser.get().getOrderItems();
+	public List<Order> getAll(@PathVariable int userId){
+		Optional<User> theUser = userService.findById(userId);
+		return theUser.get().getOrderItems();
 	}
 	
-	@PostMapping("/order")
-	public String saveOrderPrueba(@RequestParam int userId) {
+	@PostMapping("/order/{userId}")
+	public String saveOrder(@PathVariable int userId) {
 		
-		Optional<User> tempUser = userRepository.findById(userId);
+		Optional<User> theUser = userService.findById(userId);
 				
-		List<Cart> cartItems = tempUser.get().getCartItems();
+		List<Cart> cartItems = theUser.get().getCartItems();
 				
 		Calendar calendario = new GregorianCalendar();
 						
@@ -51,13 +51,13 @@ public class OrderController {
 			throw new RuntimeException("Cart vacío");
 		}else {
 			for (Cart cartItem : cartItems) {
-				Orden theOrder = new Orden();
+				Order theOrder = new Order();
 				theOrder.setUserId(userId);
 				theOrder.setNumOrder(calendario.getTimeInMillis());
 			    theOrder.setQuantity(cartItem.getQuantity());
 			    theOrder.setCategory(cartItem.getCategory());
-			    theOrder.setIdOrder(cartItem.getIdCart());
-			    orderRepository.save(theOrder);
+			    theOrder.setProductId(cartItem.getProductId());
+			    orderService.save(theOrder);
 			}			
 		}
 		return "Orden generada";
@@ -65,18 +65,17 @@ public class OrderController {
 	
 	@DeleteMapping("/order/{userId}")
 	public String deleteOrder(@PathVariable int userId) {
-		Optional<User> theUser = userRepository.findById(userId);
+		Optional<User> theUser = userService.findById(userId);
 		if(theUser.get().getCartItems().isEmpty()) {
-			throw new RuntimeException("Cart empty");
+			throw new RuntimeException("Cart vacío");
 		}else {
-			orderRepository.deleteByUserId(userId);
-			return "Delete order user: " + userId;}
+			orderService.deleteByUserId(userId);
+			return "Orden usuario " + userId + " eliminada";}
 	}
 	
 	
 	@GetMapping("/order/num_order")
-	public List<Orden> getOrderByNum(@RequestParam long numOrder) {
-		return orderRepository.getByNumOrder(numOrder);
-		
+	public List<Order> getOrderByNum(@RequestParam long numOrder) {
+		return orderService.getByNumOrder(numOrder);
 	}
 }

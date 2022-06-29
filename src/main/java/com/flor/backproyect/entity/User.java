@@ -30,7 +30,7 @@ public class User {
 
 	@OneToMany(cascade= CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	private List<Fav> favs;
+	private List<Favorite> favs;
 
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
@@ -38,16 +38,9 @@ public class User {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
-	private List<Orden> orderItems;
+	private List<Order> orderItems;
 
 	public User () {}
-
-	
-	public User(String email, String pass) {
-		this.email = email;
-		this.pass = pass;
-	}
-	
 
 	public int getId() {
 		return id;
@@ -73,11 +66,11 @@ public class User {
 		this.pass = pass;
 	}
 
-	public List<Fav> getFavs() {
+	public List<Favorite> getFavs() {
 		return favs;
 	}
 
-	public void setFavs(List<Fav> favs) {
+	public void setFavs(List<Favorite> favs) {
 		this.favs = favs;
 	}
 	
@@ -89,11 +82,11 @@ public class User {
 		this.cartItems = cartItems;
 	}
 
-	public List<Orden> getOrderItems() {
+	public List<Order> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<Orden> orderItems) {
+	public void setOrderItems(List<Order> orderItems) {
 		this.orderItems = orderItems;
 	}
 
@@ -109,14 +102,14 @@ public class User {
 		cartItems.add(theCart);
 	}
 	
-	public void addFav(Fav theFav) {
+	public void addFav(Favorite theFav) {
 		if(favs == null) {
 			favs = new ArrayList<>();
 		}
 		favs.add(theFav);
 	}
 	
-	public void addOrder(Orden theOrder) {
+	public void addOrder(Order theOrder) {
 		if(orderItems == null) {
 			orderItems = new ArrayList<>();
 		}

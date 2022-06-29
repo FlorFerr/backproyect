@@ -2,16 +2,31 @@ package com.flor.backproyect.service;
 
 import java.util.List;
 
-import com.flor.backproyect.entity.Orden;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface OrderService {
+import com.flor.backproyect.dao.IOrderRepository;
+import com.flor.backproyect.entity.Order;
 
-	public Orden saveOrder(Orden theOrder);
+@Service
+public class OrderService{
 	
-	public List<Orden> getAll(int userId);
-	
-	public void deleteByUserId(int userId);
-	
-	public List<Orden> getByNumOrder(long numOrder);
+	@Autowired
+	private IOrderRepository orderRepository;
 
+	public List<Order> getAll(int userId) {
+		return orderRepository.findAll();
+	}
+
+	public Order saveOrder(Order theOrder) {
+		return orderRepository.save(theOrder);
+	}
+
+	public void deleteByUserId(int userId) {
+		orderRepository.deleteByUserId(userId);
+	}
+
+	public List<Order> getByNumOrder(long numOrder) {
+		return orderRepository.getByNumOrder(numOrder);
+	}
 }
