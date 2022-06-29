@@ -19,4 +19,8 @@ public interface IFavoriteRepository extends JpaRepository<Favorite, Integer> {
 	@Modifying
 	@Query("delete from Favorite f where f.userId = ?1 and f.productId = ?2 and f.category = ?3")
 	public void deleteFavorite(int userId, int productId, String category);
+	
+	@Transactional
+	public void deleteByUserId(int userId);
 }
+

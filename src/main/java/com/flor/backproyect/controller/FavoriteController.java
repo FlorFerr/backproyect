@@ -25,7 +25,7 @@ import com.flor.backproyect.entity.User;
 public class FavoriteController {
 	
 	@Autowired
-	private IFavoriteRepository favService;
+	private IFavoriteRepository favoriteService;
 	
 	@Autowired
 	private IUserRepository userService;
@@ -38,11 +38,11 @@ public class FavoriteController {
 	
 	@PostMapping("/favorites/{userId}")
 	public Favorite saveFavorite(@PathVariable int userId, @RequestParam int productId, @RequestParam String category, @RequestBody Favorite favorite) {
-		Optional<Favorite> theFavorite = favService.findFavorite(userId, productId, category);
+		Optional<Favorite> theFavorite = favoriteService.findFavorite(userId, productId, category);
 		if(theFavorite.isEmpty()) {
 			Optional<User> theUser = userService.findById(userId);
 			theUser.get().addFav(favorite);
-			favService.save(favorite);
+			favoriteService.save(favorite);
 		}else {
 			throw new RuntimeException("El producto ya está en favoritos");
 		}
@@ -51,13 +51,20 @@ public class FavoriteController {
 	
 	@DeleteMapping("/favorites/{userId}")
 	public String deleteFavorite(@PathVariable int userId, @RequestParam int productId, @RequestParam String category) {
-		Optional<Favorite> favorite = favService.findFavorite(userId, productId, category);
+		Optional<Favorite> favorite = favoriteService.findFavorite(userId, productId, category);
 		if(favorite.isEmpty()) {
 			throw new RuntimeException("El producto no existe");
 		}else {
-			favService.deleteFavorite(userId, productId, category);
+			favoriteService.deleteFavorite(userId, productId, category);
 			return "Favorito eliminado";
 		}		
+	}
+	
+	@DeleteMapping("/favorites/deleteall/{userId}")
+	public String deleteAllFavorites(@PathVariable int userId) {
+		favoriteService.deleteByUserId(userId);
+		return "Favoritos eliminados";
+		
 	}
 }
 

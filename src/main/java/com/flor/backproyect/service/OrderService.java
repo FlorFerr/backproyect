@@ -29,4 +29,8 @@ public class OrderService{
 	public List<Order> getByNumOrder(long numOrder) {
 		return orderRepository.getByNumOrder(numOrder);
 	}
+	
+	public void deleteOrder(int userId, long numOrder) {
+		orderRepository.deleteByUserIdAndNumOrder(userId, numOrder);
+	}
 }

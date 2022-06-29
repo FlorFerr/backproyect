@@ -13,21 +13,25 @@ import com.flor.backproyect.entity.Favorite;
 public class FavoriteService {
 	
 	@Autowired
-	private IFavoriteRepository favRepository;
+	private IFavoriteRepository favoriteRepository;
 
 	public List<Favorite> getAll() {
-		return favRepository.findAll();	
+		return favoriteRepository.findAll();	
 		}
 
 	public Favorite saveFavorite(Favorite theFav) {
-		return favRepository.save(theFav);
+		return favoriteRepository.save(theFav);
 	}
 
 	public Optional<Favorite> findFavorite(int userId, int idFav, String category) {
-		return favRepository.findFavorite(userId, idFav, category);
+		return favoriteRepository.findFavorite(userId, idFav, category);
 	}
 
 	public void deleteFavorite(int userId, int productId, String category) {
-		favRepository.deleteFavorite(userId, productId, category);
+		favoriteRepository.deleteFavorite(userId, productId, category);
+	}
+	
+	public void deleteAllFavorites(int userId) {
+		favoriteRepository.deleteById(userId);
 	}
 }

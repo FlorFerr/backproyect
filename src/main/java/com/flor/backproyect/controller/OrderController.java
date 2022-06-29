@@ -78,4 +78,12 @@ public class OrderController {
 	public List<Order> getOrderByNum(@RequestParam long numOrder) {
 		return orderService.getByNumOrder(numOrder);
 	}
+	
+	@DeleteMapping("/order/delete/{userId}/{numOrder}")
+	public String deleteByUser(@PathVariable int userId, @PathVariable long numOrder) {
+		
+		orderService.deleteByUserIdAndNumOrder(userId, numOrder);
+		
+		return "Orden: " + numOrder + " eliminada";
+	}
 }

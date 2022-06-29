@@ -14,5 +14,8 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
 	public void deleteByUserId(int userId);
 	
 	public List<Order> getByNumOrder(long numOrder);
+	
+	@Transactional
+	public void deleteByUserIdAndNumOrder(int userId, long numOrder);
 		
 }
