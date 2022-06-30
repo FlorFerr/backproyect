@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.dao.IOrderRepository;
-import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.Order;
 import com.flor.backproyect.entity.User;
+import com.flor.backproyect.service.OrderService;
+import com.flor.backproyect.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -27,21 +27,21 @@ import com.flor.backproyect.entity.User;
 public class OrderController {
 	
 	@Autowired
-	private IOrderRepository orderService;
+	private OrderService orderService;
 	
 	@Autowired
-	private IUserRepository userService;
+	private UserService userService;
 	
 	@GetMapping("/order/{userId}")
 	public List<Order> getAll(@PathVariable int userId){
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 		return theUser.get().getOrderItems();
 	}
 	
 	@PostMapping("/order/{userId}")
 	public long saveOrder(@PathVariable int userId) {
 		
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 				
 		List<Cart> cartItems = theUser.get().getCartItems();
 				
@@ -57,7 +57,7 @@ public class OrderController {
 			    theOrder.setQuantity(cartItem.getQuantity());
 			    theOrder.setCategory(cartItem.getCategory());
 			    theOrder.setProductId(cartItem.getProductId());
-			    orderService.save(theOrder);
+			    orderService.saveOrder(theOrder);
 			}			
 		}
 		return calendario.getTimeInMillis();
@@ -65,7 +65,7 @@ public class OrderController {
 	
 	@DeleteMapping("/order/{userId}")
 	public String deleteOrder(@PathVariable int userId) {
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 		if(theUser.get().getCartItems().isEmpty()) {
 			throw new RuntimeException("Cart vacío");
 		}else {
@@ -82,7 +82,7 @@ public class OrderController {
 	@DeleteMapping("/order/delete/{userId}/{numOrder}")
 	public String deleteByUser(@PathVariable int userId, @PathVariable long numOrder) {
 		
-		orderService.deleteByUserIdAndNumOrder(userId, numOrder);
+		orderService.deleteOrder(userId, numOrder);
 		
 		return "Orden: " + numOrder + " eliminada";
 	}

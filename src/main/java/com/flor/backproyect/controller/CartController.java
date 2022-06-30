@@ -19,6 +19,8 @@ import com.flor.backproyect.dao.ICartRepository;
 import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.User;
+import com.flor.backproyect.service.CartService;
+import com.flor.backproyect.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -26,14 +28,14 @@ import com.flor.backproyect.entity.User;
 public class CartController {
 	
 	@Autowired
-	private ICartRepository cartService;
+	private CartService cartService;
 	
 	@Autowired
-	private IUserRepository userService;
+	private UserService userService;
 	
 	@GetMapping("/cart/{userId}")
 	public List<Cart> getAll(@PathVariable int userId){
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 		return theUser.get().getCartItems();
 	}
 	
@@ -44,11 +46,11 @@ public class CartController {
 			throw new RuntimeException("El producto ya existe");
 
 		}else {
-			Optional<User> theUser = userService.findById(userId);
+			Optional<User> theUser = userService.getUser(userId);
 			
 			theUser.get().addCartItems(theCart);
 	
-			cartService.save(theCart);
+			cartService.saveCart(theCart);
 		}
 		return theCart;
 	}

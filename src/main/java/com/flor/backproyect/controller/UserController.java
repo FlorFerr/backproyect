@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.User;
+import com.flor.backproyect.service.UserService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
 	@Autowired
-	private IUserRepository userService;
+	private UserService userService;
 	
 	@GetMapping("/users")
 	public List<User> findAll(){
-		return userService.findAll();
+		return userService.getAll();
 	}
 	
 	@GetMapping("/users/find/{userId}")
 	public Optional<User> getUser(@PathVariable int userId) {
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 		if(theUser == null) {
 			throw new RuntimeException("Usuario no encontrado");
 		}
@@ -53,17 +53,17 @@ public class UserController {
 	@PostMapping("/users")
 	public User saveUser(@RequestBody User theUser) {
 		theUser.setId(0);
-		userService.save(theUser);
+		userService.saveUser(theUser);
 		return theUser;
 	}
 	
 	@DeleteMapping("/users/{userId}")
 	public String deleteUser(@PathVariable int userId) {
-		Optional<User> tempUser = userService.findById(userId);
+		Optional<User> tempUser = userService.getUser(userId);
 		if(tempUser == null) {
 			throw new RuntimeException("Usuario no encontrado");
 		}
-		userService.deleteById(userId);
+		userService.deleteUser(userId);
 		return "Delete user: " + userId;
 	}
 }

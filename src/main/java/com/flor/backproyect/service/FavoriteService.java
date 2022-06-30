@@ -32,6 +32,6 @@ public class FavoriteService {
 	}
 	
 	public void deleteAllFavorites(int userId) {
-		favoriteRepository.deleteById(userId);
+		favoriteRepository.deleteByUserId(userId);
 	}
 }

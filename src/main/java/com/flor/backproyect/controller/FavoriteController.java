@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.dao.IFavoriteRepository;
-import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Favorite;
 import com.flor.backproyect.entity.User;
+import com.flor.backproyect.service.FavoriteService;
+import com.flor.backproyect.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -25,14 +25,14 @@ import com.flor.backproyect.entity.User;
 public class FavoriteController {
 	
 	@Autowired
-	private IFavoriteRepository favoriteService;
+	private FavoriteService favoriteService;
 	
 	@Autowired
-	private IUserRepository userService;
+	private UserService userService;
 	
 	@GetMapping("/favorites/{userId}")
 	public List<Favorite> getAllFavorites(@PathVariable int userId){
-		Optional<User> theUser = userService.findById(userId);
+		Optional<User> theUser = userService.getUser(userId);
 		return theUser.get().getFavs();
 	}
 	
@@ -40,9 +40,9 @@ public class FavoriteController {
 	public Favorite saveFavorite(@PathVariable int userId, @RequestParam int productId, @RequestParam String category, @RequestBody Favorite favorite) {
 		Optional<Favorite> theFavorite = favoriteService.findFavorite(userId, productId, category);
 		if(theFavorite.isEmpty()) {
-			Optional<User> theUser = userService.findById(userId);
+			Optional<User> theUser = userService.getUser(userId);
 			theUser.get().addFav(favorite);
-			favoriteService.save(favorite);
+			favoriteService.saveFavorite(favorite);
 		}else {
 			throw new RuntimeException("El producto ya está en favoritos");
 		}
@@ -62,7 +62,7 @@ public class FavoriteController {
 	
 	@DeleteMapping("/favorites/deleteall/{userId}")
 	public String deleteAllFavorites(@PathVariable int userId) {
-		favoriteService.deleteByUserId(userId);
+		favoriteService.deleteAllFavorites(userId);
 		return "Favoritos eliminados";
 		
 	}
