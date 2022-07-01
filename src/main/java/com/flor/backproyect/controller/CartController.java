@@ -38,8 +38,8 @@ public class CartController {
 	}
 	
 	@PostMapping("/cart/{userId}")
-	public Cart saveCart(@PathVariable int userId, @RequestParam int productId, @RequestParam String category, @RequestBody Cart theCart) {
-		Optional<Cart> cartItem = cartService.findCartItem(userId, productId, category);
+	public Cart saveCart(@PathVariable int userId, @RequestBody Cart theCart) {
+		Optional<Cart> cartItem = cartService.findCartItem(theCart.getUserId(), theCart.getProductId(), theCart.getCategory());
 		if(cartItem.isPresent()) {
 			throw new RuntimeException("El producto ya existe");
 

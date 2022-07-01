@@ -37,8 +37,8 @@ public class FavoriteController {
 	}
 	
 	@PostMapping("/favorites/{userId}")
-	public Favorite saveFavorite(@PathVariable int userId, @RequestParam int productId, @RequestParam String category, @RequestBody Favorite favorite) {
-		Optional<Favorite> theFavorite = favoriteService.findFavorite(userId, productId, category);
+	public Favorite saveFavorite(@PathVariable int userId, @RequestBody Favorite favorite) {
+		Optional<Favorite> theFavorite = favoriteService.findFavorite(favorite.getUserId(), favorite.getProductId(), favorite.getCategory());
 		if(theFavorite.isEmpty()) {
 			Optional<User> theUser = userService.getUser(userId);
 			theUser.get().addFav(favorite);
