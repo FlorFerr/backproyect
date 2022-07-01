@@ -54,8 +54,9 @@ public class CartController {
 	}
 	
 	@PutMapping("/cart/{userId}")
-	public void updateCartItem(@PathVariable int userId, @RequestParam int quantity, @RequestParam int productId, @RequestParam String category) {
-		cartService.updateQuantity(quantity, userId, productId, category);
+	public void updateCartItem(@RequestBody Cart theCart) {
+		cartService.updateQuantity(theCart.getQuantity(), theCart.getUserId(), theCart.getProductId(), theCart.getCategory());
+		
 	}
 	
 	@DeleteMapping("/cart/{userId}")
