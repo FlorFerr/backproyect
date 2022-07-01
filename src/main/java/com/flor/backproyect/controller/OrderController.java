@@ -52,7 +52,7 @@ public class OrderController {
 		}else {
 			for (Cart cartItem : cartItems) {
 				Order theOrder = new Order();
-				theOrder.setUserId(userId);
+				theOrder.setUserId(userId);			
 				theOrder.setNumOrder(calendario.getTimeInMillis());
 			    theOrder.setQuantity(cartItem.getQuantity());
 			    theOrder.setCategory(cartItem.getCategory());
