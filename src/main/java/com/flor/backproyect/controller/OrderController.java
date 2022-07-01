@@ -75,8 +75,16 @@ public class OrderController {
 	
 	
 	@GetMapping("/order/num_order")
-	public List<Order> getOrderByNum(@RequestParam long numOrder) {
-		return orderService.getByNumOrder(numOrder);
+	public Optional<Order> getOrderByNum(@RequestParam long numOrder) {
+		
+		Optional<Order> theOrder = orderService.getByNumOrder(numOrder);
+		
+		if(theOrder.isPresent()) {
+			return theOrder;
+		}else {
+			throw new RuntimeException("Orden no encontrada");
+		}
+		
 	}
 	
 	@DeleteMapping("/order/delete/{userId}/{numOrder}")

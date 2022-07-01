@@ -1,6 +1,7 @@
 package com.flor.backproyect.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +14,7 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
 	@Transactional
 	public void deleteByUserId(int userId);
 	
-	public List<Order> getByNumOrder(long numOrder);
+	public Optional<Order> getByNumOrder(long numOrder);
 	
 	@Transactional
 	public void deleteByUserIdAndNumOrder(int userId, long numOrder);

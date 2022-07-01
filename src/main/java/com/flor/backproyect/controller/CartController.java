@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flor.backproyect.dao.ICartRepository;
-import com.flor.backproyect.dao.IUserRepository;
 import com.flor.backproyect.entity.Cart;
 import com.flor.backproyect.entity.User;
 import com.flor.backproyect.service.CartService;

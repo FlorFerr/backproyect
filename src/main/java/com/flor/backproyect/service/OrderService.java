@@ -1,6 +1,7 @@
 package com.flor.backproyect.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class OrderService{
 		orderRepository.deleteByUserId(userId);
 	}
 
-	public List<Order> getByNumOrder(long numOrder) {
+	public Optional<Order> getByNumOrder(long numOrder) {
 		return orderRepository.getByNumOrder(numOrder);
 	}
 	
