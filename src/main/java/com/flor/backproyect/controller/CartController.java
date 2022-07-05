@@ -37,6 +37,7 @@ public class CartController {
 		return theUser.get().getCartItems();
 	}
 	
+	//FindCartItem => int userId, int productId, String category
 	@PostMapping("/cart/{userId}")
 	public Cart saveCart(@PathVariable int userId, @RequestBody Cart theCart) {
 		Optional<Cart> cartItem = cartService.findCartItem(theCart.getUserId(), theCart.getProductId(), theCart.getCategory());
